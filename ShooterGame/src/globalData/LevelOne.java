@@ -3,8 +3,7 @@ package globalData;
 
 import java.awt.Graphics2D;
 import core.*;
-import main.GameUI;
-import main.KeyHandler;
+import main.*;
 
 public class LevelOne implements Level{
 	
@@ -16,9 +15,8 @@ public class LevelOne implements Level{
 	public Background bg1;
 	public Background bg2;
 	public JetFighter jet;
-	public Heart heart;
-	public Obstacle[] obstacles = new Obstacle[3];
-	public Enemy[] enemy = new Enemy[3];
+	public ObstacleController obstacles;
+	public EnemyController enemy;
 	
 	//Constructor
 	public LevelOne(GameUI gameUI, KeyHandler keyH) {
@@ -30,7 +28,7 @@ public class LevelOne implements Level{
 
 	//Change Level
 	public void changeLevel() {
-
+		gameUI.changeLevel(new LevelTwo());
 	}
 	
 	//LevelSetting_Design
@@ -38,33 +36,17 @@ public class LevelOne implements Level{
 		bg1 = new Background(gameUI, 0, 0, "/background/space_bg.jpg");
 		bg2 = new Background(gameUI, 0, (-Constant.screenHeight),"/background/space_bg.jpg");
 		jet = new JetFighter(gameUI,keyH);
-		ObstaclesDesign();
-		EnemyDesign();
-		ObjectDesign();
-	}
-	
-	private void ObstaclesDesign() {
-		int[] Obs_x = {64,300,650};
-		int[] Obs_y = {-160,-400,-320};
-		for(int i=0;i<3;i++) 
-			obstacles[i] = new Obstacle(gameUI, Obs_x[i], Obs_y[i]);
-	}
-	
-	private void EnemyDesign() {
-		int[] Obs_x = {64,300,650};
-		int[] Obs_y = {-160,-400,-320};
-		for(int i=0;i<3;i++) 
-			enemy[i] = new Enemy(gameUI, Obs_x[i], Obs_y[i]);
-	}
-	
-	private void ObjectDesign() {
-		// TODO Auto-generated method stub
+		obstacles = new ObstacleController(gameUI,3);
+		enemy = new EnemyController(gameUI,3);
 		
 	}
+		
 
 	public void update() {
 		bg1.update();
 		bg2.update();
+		obstacles.update();
+		enemy.update();
 		Updater.update();
 	}
 	

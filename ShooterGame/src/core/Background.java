@@ -30,16 +30,13 @@ public class Background{
 		}
 	}
 	
-
 	public void draw(Graphics2D g2) {
 		g2.drawImage(backgroundImage, x, y, Constant.screenWidth, Constant.screenHeight,null);
 	}
-	
-	
+		
 	public void update() {
 		y += speed;
-		if(y >= Constant.screenHeight) {
+		if(y >= Constant.screenHeight) 
 			y = - Constant.screenHeight;
-		}
 	}
 }

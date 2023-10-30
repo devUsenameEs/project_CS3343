@@ -1,5 +1,6 @@
 package main;
 
+import globalData.ModuleHP;
 import globalData.Renderable;
 import globalData.Updateable;
 import globalData.Updater;
@@ -9,6 +10,7 @@ public class Timer implements Updateable{
 	int begginning_Interval;
 
 	public Timer (int interval) {
+		this.interval = interval;
 		this.begginning_Interval = interval;
 		Updater.addUpdateList(this);
 	}
@@ -26,6 +28,10 @@ public class Timer implements Updateable{
 	public void reset() {
 		interval = begginning_Interval;
 	}
+	
+	public int getTime() {
+		return interval;
+	}
 
 	@Override
 	public String getID() {
@@ -34,6 +40,11 @@ public class Timer implements Updateable{
 
 	@Override
 	public Renderable getRenderable() {
+		return null;
+	}
+
+	@Override
+	public ModuleHP getHPinterface() {
 		return null;
 	}
 }

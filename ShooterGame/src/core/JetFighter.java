@@ -7,10 +7,12 @@ import javax.imageio.ImageIO;
 
 import globalData.*;
 
-public class JetFighter extends Entity implements Renderable,Updateable{
+public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable{
 	
 	KeyHandler keyHandler;
-	Timer timer;
+	Timer bulletTimer;
+	Timer hurtTimer;
+	boolean getHurt;
 	
 	public JetFighter(GameUI gameUI, KeyHandler keyHandler) {
 		super(gameUI);
@@ -22,14 +24,15 @@ public class JetFighter extends Entity implements Renderable,Updateable{
 		this.y = Constant.screenHeight/2 + (Constant.tileSize*3);
 		this.width = Constant.tileSize;
 		this.height = Constant.tileSize;
-		this.speed = 4;
+		this.speed = 5;
 		
 		this.maxLife = 6;
 		this.HP = maxLife;
 		this.heart = new Heart(gameUI,this);
 		getImage();
 		
-		timer = new Timer(100);
+		bulletTimer = new Timer(100);
+		getHurt = false;
 	}
 	
 	private void getImage() {
@@ -38,6 +41,25 @@ public class JetFighter extends Entity implements Renderable,Updateable{
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void changeImage() {
+		try {
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/jetFighters/jetGetHurt.png"));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void getHurt() {
+		getHurt = true;
+		hurtTimer = new Timer(500);
+		changeImage();
+		
+	}
+	
+	public boolean isGetHurt() {
+		return getHurt;
 	}
 	
 	@Override
@@ -78,15 +100,23 @@ public class JetFighter extends Entity implements Renderable,Updateable{
 		}
 		
 		//bullet fire
-		if(timer.TimeToZero()) {
+		if(bulletTimer.TimeToZero() && !getHurt) {
 			new Bullet(gameUI, x+Constant.tileSize/2, y);
-			timer.reset();
+			bulletTimer.reset();
 		}
 		
 		//Collision
 		if(this.HP == 0) {
 			Updater.removeUpdateList(this);
 			Render.removeRenderableObject(this);
+		}
+		
+		//getHurt
+		if(hurtTimer != null && hurtTimer.TimeToZero()) {
+			Updater.removeUpdateList(hurtTimer);
+			hurtTimer = null;
+			getHurt = false;
+			getImage();
 		}
 	}
 
@@ -97,7 +127,7 @@ public class JetFighter extends Entity implements Renderable,Updateable{
 	
 	@Override
 	public String getID() {
-		return "JetFighter";
+		return "jetFighter";
 	}
 
 	@Override
@@ -140,10 +170,8 @@ public class JetFighter extends Entity implements Renderable,Updateable{
 		this.HP += x;
 	}
 
-
-	
-	
-	
-
-	
+	@Override
+	public ModuleHP getHPinterface() {
+		return this;
+	}
 }

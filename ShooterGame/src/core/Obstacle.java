@@ -5,35 +5,38 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import globalData.*;
 import main.GameUI;
+import main.Timer;
 
 public class Obstacle extends Entity implements Renderable,Updateable{
 	
 	int beginner_y;
 	int beginner_x;
+	Timer timer;
+	boolean firstTime;
 	
-	public Obstacle(GameUI gameUI,int x,int y) {
+	public Obstacle(GameUI gameUI,int x,int y, int width, int height) {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
 		
 		this.x = x;
 		this.y = y;
-		this.beginner_x = y;
-		this.beginner_y = y;
+		this.width= width;
+		this.height = height;
+		firstTime = true;
 		
 		defaultSetting();
 		getImage();
 	}
 
 	public void defaultSetting() {
-		this.width= Constant.tileSize;
-		this.height = Constant.tileSize;
-		this.speed = 2;
+		
+		this.speed = 1;
 	}
 	
 	public void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/obstacle_img/stone.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/obstacle_img/obstacle2.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -53,66 +56,53 @@ public class Obstacle extends Entity implements Renderable,Updateable{
 	public void update() {
 		y += speed;
 		if(y >= Constant.screenHeight) {
-			y = beginner_y;
+			Updater.removeUpdateList(this);
+			Render.removeRenderableObject(this);
 		}
 		
-		Updateable collisionObj = isColliding(this,"JetFight");
+		Updateable collisionObj = isColliding(this,"jetFighter");
 		if(collisionObj != null) {
-				collisionObj.getRenderable().reduceHP(0.5);
+			JetFighter obj = (JetFighter)collisionObj;
+			if(obj.isGetHurt() == false) {
+				System.out.println("GetHurt");
+				obj.reduceHP(1);
+				obj.getHurt();
+			}
 		}
 	}
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
-		return null;
+		return "obstacle";
 	}
 
 	@Override
 	public Renderable getRenderable() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void reduceHP(double x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addHP(double x) {
-		// TODO Auto-generated method stub
-		
+		return this;
 	}
 
 	@Override
 	public double getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return x;
 	}
 
 	@Override
 	public double getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return y;
 	}
 
 	@Override
 	public double getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return width;
 	}
 
 	@Override
 	public double getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return height;
 	}
 
 	@Override
-	public double getHP() {
-		// TODO Auto-generated method stub
-		return 0;
+	public ModuleHP getHPinterface() {
+		return null;
 	}
 }

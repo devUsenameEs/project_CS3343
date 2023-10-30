@@ -6,6 +6,7 @@ public interface Updateable {
 	public void update();
 	public String getID();
 	public Renderable getRenderable();
+	public ModuleHP getHPinterface();
 	
 	public default Updateable isColliding(Renderable thisObject, String otherObjID) {
 		ArrayList<Updateable> objects = Updater.getUpdateableObjects();

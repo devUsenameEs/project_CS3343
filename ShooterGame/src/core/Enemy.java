@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import globalData.Constant;
+import globalData.ModuleHP;
 import globalData.Render;
 import globalData.Renderable;
 import globalData.Updateable;
@@ -13,31 +14,28 @@ import globalData.Updater;
 import main.GameUI;
 import main.Timer;
 
-public class Enemy extends Entity implements Renderable,Updateable{
+public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 
-	Timer timer;
+	Timer bulletTimer;
 	boolean firstTime;
 	
-	public Enemy(GameUI gameUI , int x, int y) {
+	public Enemy(GameUI gameUI , int x, int y, int width, int height,int time) {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
-		
+		firstTime = true;
 		this.x = x;
 		this.y = y;
-		
-		firstTime = true;
-		
-		
+		this.width = width;
+		this.height = height;
+		bulletTimer = new Timer(time);
 		defaultSetting();
 		getImage();
 	}
 	
 	private void defaultSetting() {
 		this.HP = 2;
-		this.speed = 1.5;
-		this.width = Constant.tileSize;
-		this.height = Constant.tileSize;
+		this.speed = 2;
 	}
 
 	private void getImage() {
@@ -49,26 +47,40 @@ public class Enemy extends Entity implements Renderable,Updateable{
 	}
 	
 	@Override
+	public void reduceHP(double x) {
+		HP -= x;
+	}
+
+	@Override
+	public void addHP(double x) {
+		HP += x;
+	}
+
+	@Override
+	public double getHP() {
+		return HP;
+	}
+	
+	@Override
 	public void update() {
 		y += speed;
 		if(y >= Constant.screenHeight)
 			Updater.removeUpdateList(this);
 		
-		Updateable collisionObj = isColliding(this,"JetFighter");
+		Updateable collisionObj = isColliding(this,"jetFighter");
 		if(collisionObj != null) {
-			if(firstTime) {
-				System.out.println("collision happen");
-				collisionObj.getRenderable().reduceHP(0.5);
-				timer = new Timer(600);
-				firstTime = false;
+			JetFighter obj = (JetFighter)collisionObj;
+			if(obj.isGetHurt() == false) {
+				obj.reduceHP(1);
+				obj.getHurt();
 			}
-			else {
-				if(timer.TimeToZero()) {
-					collisionObj.getRenderable().reduceHP(0.5);
-					timer.reset();
-				}
-			}
-		}		
+		}	
+		
+		//bullet fire
+		if(bulletTimer.TimeToZero() && y>=0) {
+			new Bullet_Enemy(gameUI, x+Constant.tileSize/2, y);
+			bulletTimer.reset();
+		}
 		
 		if(HP == 0) {
 			Updater.removeUpdateList(this);
@@ -117,22 +129,7 @@ public class Enemy extends Entity implements Renderable,Updateable{
 	}
 
 	@Override
-	public void reduceHP(double x) {
-		HP -= x;
-		
+	public ModuleHP getHPinterface() {
+		return this;
 	}
-
-	@Override
-	public void addHP(double x) {
-		HP += x;
-	}
-
-	@Override
-	public double getHP() {
-		// TODO Auto-generated method stub
-		return HP;
-	}
-
-
-
 }

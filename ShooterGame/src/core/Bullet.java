@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import globalData.ModuleHP;
 import globalData.Render;
 import globalData.Renderable;
 import globalData.Updateable;
@@ -37,7 +38,7 @@ public class Bullet extends Entity implements Renderable,Updateable{
 
 	public void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet01.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet_player.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -64,10 +65,9 @@ public class Bullet extends Entity implements Renderable,Updateable{
 		//Collision
 		Updateable collisionObj = isColliding(this,"enemy");
 		if(collisionObj != null) {
-				System.out.println("Fire!!!");
 				Updater.removeUpdateList(this);
 				Render.removeRenderableObject(this);
-				collisionObj.getRenderable().reduceHP(1);
+				collisionObj.getHPinterface().reduceHP(1);
 		}
 	}
 
@@ -102,18 +102,7 @@ public class Bullet extends Entity implements Renderable,Updateable{
 	}
 
 	@Override
-	public void reduceHP(double x) {
+	public ModuleHP getHPinterface() {
+		return null;
 	}
-
-	@Override
-	public double getHP() {
-		return 0;
-	}
-
-	@Override
-	public void addHP(double x) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
