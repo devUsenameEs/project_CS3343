@@ -6,7 +6,6 @@ public interface Updateable {
 	public void update();
 	public String getID();
 	public Renderable getRenderable();
-	public ModuleHP getHPinterface();
 	
 	public default Updateable isColliding(Renderable thisObject, String otherObjID) {
 		ArrayList<Updateable> objects = Updater.getUpdateableObjects();
@@ -16,6 +15,5 @@ public interface Updateable {
 					if(thisObject.getY() < o.getRenderable().getY() + o.getRenderable().getHeight() && thisObject.getY() + thisObject.getHeight() > o.getRenderable().getY())
 						return o;
 		return null;
-		
 	}
 }

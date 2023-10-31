@@ -1,6 +1,5 @@
 package main;
 
-import globalData.ModuleHP;
 import globalData.Renderable;
 import globalData.Updateable;
 import globalData.Updater;
@@ -40,11 +39,6 @@ public class Timer implements Updateable{
 
 	@Override
 	public Renderable getRenderable() {
-		return null;
-	}
-
-	@Override
-	public ModuleHP getHPinterface() {
 		return null;
 	}
 }

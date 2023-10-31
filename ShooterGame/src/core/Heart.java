@@ -10,15 +10,12 @@ import main.GameUI;
 
 public class Heart{
 	
-	GameUI gameUI;
-	JetFighter jet;
-	protected BufferedImage heartBlank,heartHalf,heartFull;
+	private JetFighter jet;
+	private BufferedImage heartBlank,heartHalf,heartFull;
 	
-	public Heart(GameUI gameUI,JetFighter jet) {
-		this.gameUI = gameUI;
+	public Heart(JetFighter jet) {
 		this.jet = jet;
 		getImage();
-		
 	}
 
 	public void getImage(){
@@ -32,12 +29,14 @@ public class Heart{
 	}
 	
 	public void draw(Graphics2D g2) {
-		int x = Constant.tileSize/2;
+		int x = Constant.tileSize;
 		int y = Constant.screenHeight - Constant.tileSize;
+		int width = Constant.tileSize/2;
+		int height = Constant.tileSize/2;
 		int i = 0;
 		
 		while(i < jet.maxLife / 2) {
-			g2.drawImage(heartBlank, x, y, null);
+			g2.drawImage(heartBlank, x, y,width,height, null);
 			i++;
 			x+= Constant.tileSize;
 		}
@@ -47,10 +46,10 @@ public class Heart{
 		i = 0;
 		
 		while(i < jet.HP) {
-			g2.drawImage(heartHalf, x, y, null);
+			g2.drawImage(heartHalf, x, y, width,height,null);
 			i++;
 			if(i < jet.HP) {
-				g2.drawImage(heartFull, x,y,null);
+				g2.drawImage(heartFull, x,y,width,height,null);
 			}
 			i++;
 			x += Constant.tileSize;

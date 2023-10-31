@@ -1,9 +1,7 @@
 package core;
 
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
 import globalData.Constant;
 import globalData.Render;
 import globalData.Updateable;
@@ -12,13 +10,19 @@ import main.GameUI;
 
 public class Bullet_Enemy extends Bullet{
 
-	public Bullet_Enemy(GameUI gameUI, int x, int y) {
-		super(gameUI, x, y);
+	public Bullet_Enemy(GameUI gameUI, int x, int y,Entity obj) {
+		super(gameUI, x, y,obj);
+	}
+	
+	public void defaultSetting() {
+		this.width= 4;
+		this.height = 8;
+		this.speed = 2;
 	}
 	
 	public void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet01.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet_enemy01.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

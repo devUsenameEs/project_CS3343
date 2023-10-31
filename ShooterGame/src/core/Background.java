@@ -5,17 +5,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import globalData.*;
-import main.GameUI;
 
 public class Background{
 	
-	GameUI gameUI;
+	private int x,y,speed;
+	private BufferedImage backgroundImage;
 	
-	protected int x,y,speed;
-	protected BufferedImage backgroundImage;
-	
-	public Background(GameUI gameUI , int x, int y, String path) {
-		this.gameUI = gameUI;		
+	public Background(int x, int y, String path) {		
 		this.x = x;
 		this.y = y;
 		this.speed = 1;

@@ -1,44 +1,41 @@
 package core;
 
 import main.GameUI;
-import main.KeyHandler;
-
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-
-import globalData.ModuleHP;
 import globalData.Render;
 import globalData.Renderable;
 import globalData.Updateable;
 import globalData.Updater;
 
 
-public class Bullet extends Entity implements Renderable,Updateable{
+public class Bullet extends Objects implements Renderable,Updateable{
 	
-	public Bullet(GameUI gameUI,int x, int y) {
+	Entity obj;
+	
+	public Bullet(GameUI gameUI,int x, int y, Entity obj) {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
 		
-		this.x = x - (width/2);
-		this.y = y;
-		
 		defaultSetting();
 		getImage();
+		
+		this.x = x + (obj.width/2);
+		this.y = y;
+		this.obj = obj;
 	}
 	
 	public void defaultSetting() {
 		this.width= 4;
-		this.height = 8;
-		this.speed = 5;
+		this.height = 16;
+		this.speed = 8;
 	}
 
 	public void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet_player.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet_player01.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -65,9 +62,14 @@ public class Bullet extends Entity implements Renderable,Updateable{
 		//Collision
 		Updateable collisionObj = isColliding(this,"enemy");
 		if(collisionObj != null) {
+				Enemy emy = (Enemy)collisionObj;
 				Updater.removeUpdateList(this);
 				Render.removeRenderableObject(this);
-				collisionObj.getHPinterface().reduceHP(1);
+				emy.reduceHP(1);
+				if(emy.HP == 0) {
+					JetFighter jet = (JetFighter)obj;
+					jet.addScore(100);
+				}
 		}
 	}
 
@@ -99,10 +101,5 @@ public class Bullet extends Entity implements Renderable,Updateable{
 	@Override
 	public double getHeight() {
 		return height;
-	}
-
-	@Override
-	public ModuleHP getHPinterface() {
-		return null;
 	}
 }

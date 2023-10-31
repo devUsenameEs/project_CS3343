@@ -2,47 +2,76 @@ package core;
 
 import java.awt.Graphics2D;
 import java.io.IOException;
-
+import java.util.Random;
 import javax.imageio.ImageIO;
-
 import globalData.Constant;
 import globalData.ModuleHP;
 import globalData.Render;
 import globalData.Renderable;
 import globalData.Updateable;
 import globalData.Updater;
+import main.BulletController;
 import main.GameUI;
-import main.Timer;
 
 public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
-
-	Timer bulletTimer;
-	boolean firstTime;
 	
-	public Enemy(GameUI gameUI , int x, int y, int width, int height,int time) {
+	public Enemy(GameUI gameUI , int x, int y,int time) {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
-		firstTime = true;
+		//default setting
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
-		bulletTimer = new Timer(time);
 		defaultSetting();
 		getImage();
+		//bullet setting
+		Random random = new Random();
+		int timeI = random.nextInt(1000)+500;
+		bullet = new BulletController(gameUI,timeI);
+		bulletType = "Bullet_Enemy";
 	}
 	
 	private void defaultSetting() {
-		this.HP = 2;
-		this.speed = 2;
+		this.maxLife = 2;
+		this.HP = maxLife;
+		this.width = 32;
+		this.height = 32;
+		this.speed = 1;
 	}
 
 	private void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemy.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemy01.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void update() {
+		y += speed;
+		if(y >= Constant.screenHeight)
+			Updater.removeUpdateList(this);
+		
+		//collision happen
+		Updateable collisionObj = isColliding(this,"jetFighter");
+		if(collisionObj != null) {
+			JetFighter obj = (JetFighter)collisionObj;
+			if(obj.isGetHurt() == false) {
+				obj.reduceHP(1);
+				obj.getHurt();
+			}
+		}			
+		
+		//if die
+		if(HP == 0) {
+			Updater.removeUpdateList(this);
+			Render.removeRenderableObject(this);
+		}
+		
+		//bullet fire
+		if(bullet.canFire()) {
+			bullet.fireBullet(bulletType, x, y, this);
 		}
 	}
 	
@@ -59,33 +88,6 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 	@Override
 	public double getHP() {
 		return HP;
-	}
-	
-	@Override
-	public void update() {
-		y += speed;
-		if(y >= Constant.screenHeight)
-			Updater.removeUpdateList(this);
-		
-		Updateable collisionObj = isColliding(this,"jetFighter");
-		if(collisionObj != null) {
-			JetFighter obj = (JetFighter)collisionObj;
-			if(obj.isGetHurt() == false) {
-				obj.reduceHP(1);
-				obj.getHurt();
-			}
-		}	
-		
-		//bullet fire
-		if(bulletTimer.TimeToZero() && y>=0) {
-			new Bullet_Enemy(gameUI, x+Constant.tileSize/2, y);
-			bulletTimer.reset();
-		}
-		
-		if(HP == 0) {
-			Updater.removeUpdateList(this);
-			Render.removeRenderableObject(this);
-		}
 	}
 
 	@Override
@@ -126,10 +128,5 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 	@Override
 	public double getHeight() {
 		return height;
-	}
-
-	@Override
-	public ModuleHP getHPinterface() {
-		return this;
 	}
 }

@@ -2,6 +2,8 @@ package core;
 
 
 import java.awt.image.BufferedImage;
+
+import main.BulletController;
 import main.GameUI;
 
 public class Entity {
@@ -13,6 +15,9 @@ public class Entity {
 	protected int width,height;
 	protected double speed;
 	
+	protected BulletController bullet;
+	protected String bulletType; 
+	
 	protected Heart heart;
 	protected double HP;
 	protected double maxLife;
@@ -21,5 +26,4 @@ public class Entity {
 	public Entity(GameUI gameUI) {
 		this.gameUI = gameUI;
 	}
-
 }

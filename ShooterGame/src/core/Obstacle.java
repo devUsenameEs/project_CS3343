@@ -100,9 +100,4 @@ public class Obstacle extends Entity implements Renderable,Updateable{
 	public double getHeight() {
 		return height;
 	}
-
-	@Override
-	public ModuleHP getHPinterface() {
-		return null;
-	}
 }

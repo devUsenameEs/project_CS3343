@@ -33,12 +33,11 @@ public class LevelOne implements Level{
 	
 	//LevelSetting_Design
 	public void LevelDesign() {
-		bg1 = new Background(gameUI, 0, 0, "/background/space_bg.jpg");
-		bg2 = new Background(gameUI, 0, (-Constant.screenHeight),"/background/space_bg.jpg");
+		bg1 = new Background(0, 0, "/background/space_bg.jpg");
+		bg2 = new Background(0, (-Constant.screenHeight),"/background/space_bg.jpg");
 		jet = new JetFighter(gameUI,keyH);
 		obstacles = new ObstacleController(gameUI,3);
 		enemy = new EnemyController(gameUI,3);
-		
 	}
 		
 
