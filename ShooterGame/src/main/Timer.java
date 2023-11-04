@@ -5,8 +5,8 @@ import globalData.Updateable;
 import globalData.Updater;
 
 public class Timer implements Updateable{
-	public int interval = 0;
-	int begginning_Interval;
+	private int interval = 0;
+	private int begginning_Interval;
 
 	public Timer (int interval) {
 		this.interval = interval;
@@ -26,10 +26,6 @@ public class Timer implements Updateable{
 	
 	public void reset() {
 		interval = begginning_Interval;
-	}
-	
-	public int getTime() {
-		return interval;
 	}
 
 	@Override

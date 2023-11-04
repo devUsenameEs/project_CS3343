@@ -9,28 +9,22 @@ import main.Timer;
 
 public class Obstacle extends Entity implements Renderable,Updateable{
 	
-	int beginner_y;
-	int beginner_x;
 	Timer timer;
-	boolean firstTime;
 	
 	public Obstacle(GameUI gameUI,int x,int y, int width, int height) {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
-		
+		//default setting
 		this.x = x;
 		this.y = y;
 		this.width= width;
 		this.height = height;
-		firstTime = true;
-		
 		defaultSetting();
 		getImage();
 	}
 
 	public void defaultSetting() {
-		
 		this.speed = 1;
 	}
 	

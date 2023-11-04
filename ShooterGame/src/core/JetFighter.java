@@ -11,7 +11,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	
 	private KeyHandler keyHandler;
 	private boolean hurtState;
-	private int score;
+	private Score score;
 	private Timer hurtTimer;
 	
 	public JetFighter(GameUI gameUI, KeyHandler keyHandler) {
@@ -23,17 +23,18 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		//default setting
 		this.x = Constant.screenWidth/2 - (Constant.tileSize/2);
 		this.y = Constant.screenHeight/2 + (Constant.tileSize*3);
-		this.width = Constant.tileSize;
-		this.height = Constant.tileSize;
+		this.width = 40;//Constant.tileSize;
+		this.height = 40;//Constant.tileSize;
 		this.speed = 5;
 		//bullet setting
 		this.bulletType = "Bullet";
-		this.bullet = new BulletController(gameUI,100);
-		this.score = 0;
+		this.bullet = new BulletController(gameUI,300);
+		this.score = new Score(this);
 		//heart setting
 		this.heart = new Heart(this);
 		this.maxLife = 6;
 		this.HP = maxLife;
+		
 		
 		hurtState = false;
 		getImage();
@@ -57,6 +58,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	
 	public void getHurt() {
 		hurtState = true;
+		score.setContinuously(false);
 		hurtTimer = new Timer(800);
 		changeImage();
 	}
@@ -66,27 +68,38 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	}
 	
 	public void addScore(int x) {
-		score += x;
-		System.out.println(score);
+		score.addScore(x);
+		System.out.println(score.getScore());
 	}
 	
 	public void changeBullet(String x) {
 		bulletType = x;
 	}
 	
+	public void changeBulletTime(int x) {
+		bullet.changeBulletTimer(x);
+	}
+	
+	public int getScore() {
+		return score.getScore();
+	}
+	
 	@Override
 	public void update() {
 		//JET not out of bounds
-		if( x == Constant.screenWidth ) {x = -Constant.tileSize;}
-		else if( (x+Constant.tileSize) == 0 ) {x = Constant.screenWidth;}
-		else if( y == Constant.screenHeight ) {y = -Constant.tileSize;}
-		else if( (y+Constant.tileSize) == 0 ) {y = Constant.screenHeight;}
+		if( x >= Constant.screenWidth ) { x = -Constant.tileSize;}
+		else if( (x+Constant.tileSize) <= 0 ) {x = Constant.screenWidth;}
+		else if( y >= Constant.screenHeight ) {y = -Constant.tileSize;}
+		
 		
 		//control key
 		if(keyHandler.upPressed == true) {y -= speed;}
 		if(keyHandler.downPressed == true) {y += speed;}
 		if(keyHandler.leftPressed == true) {x -= speed;}
 		if(keyHandler.rightPressed == true) {x += speed;}
+		if(keyHandler.spacePressed == true && bullet.canFire() && !hurtState) {
+			bullet.fireBullet(bulletType, x, y, this);
+		}
 				
 		//When HP is 0 and will die
 		if(this.HP == 0) {
@@ -102,17 +115,13 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 			hurtState = false;
 			getImage();
 		}
-		
-		//bullet fire
-		if(bullet.canFire() && !hurtState) {
-			bullet.fireBullet(bulletType, x, y, this);
-		}
 	}
 	
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(bufferedImage, x, y, width, height,null);
 		heart.draw(g2);
+		score.draw(g2);
 	}
 
 	@Override

@@ -5,29 +5,30 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import globalData.*;
+import main.GameUI;
 
-public class Background{
+public class Background extends Objects{
 	
-	private int x,y,speed;
-	private BufferedImage backgroundImage;
-	
-	public Background(int x, int y, String path) {		
+	public Background(GameUI gameUI,int x, int y, String path) {		
+		super(gameUI);
 		this.x = x;
 		this.y = y;
+		this.width = Constant.screenWidth;
+		this.height = Constant.screenHeight;
 		this.speed = 1;
 		getImage(path);
 	}
 	
 	public void getImage(String path) {
 		try {
-			backgroundImage = ImageIO.read(getClass().getResourceAsStream(path));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream(path));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void draw(Graphics2D g2) {
-		g2.drawImage(backgroundImage, x, y, Constant.screenWidth, Constant.screenHeight,null);
+		g2.drawImage(bufferedImage, x, y, width, height,null);
 	}
 		
 	public void update() {

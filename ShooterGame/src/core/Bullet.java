@@ -29,8 +29,8 @@ public class Bullet extends Objects implements Renderable,Updateable{
 	
 	public void defaultSetting() {
 		this.width= 4;
-		this.height = 16;
-		this.speed = 8;
+		this.height = 8;
+		this.speed = 12;
 	}
 
 	public void getImage() {

@@ -15,27 +15,27 @@ import main.GameUI;
 
 public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 	
-	public Enemy(GameUI gameUI , int x, int y,int time) {
+	public Enemy(GameUI gameUI , int x, int y,int width,int height) {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
 		//default setting
 		this.x = x;
 		this.y = y;
+		this.width = 32;
+		this.height = 32;
 		defaultSetting();
 		getImage();
 		//bullet setting
 		Random random = new Random();
 		int timeI = random.nextInt(1000)+500;
 		bullet = new BulletController(gameUI,timeI);
-		bulletType = "Bullet_Enemy";
+		bulletType = "";
 	}
 	
 	private void defaultSetting() {
-		this.maxLife = 2;
+		this.maxLife = 1;
 		this.HP = maxLife;
-		this.width = 32;
-		this.height = 32;
 		this.speed = 1;
 	}
 
