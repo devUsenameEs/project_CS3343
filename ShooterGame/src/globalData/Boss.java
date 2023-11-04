@@ -2,7 +2,7 @@ package globalData;
 
 import java.awt.Graphics2D;
 
-public class LevelTwo implements Level{
+public class Boss implements Level{
 
 	@Override
 	public void LevelDesign() {

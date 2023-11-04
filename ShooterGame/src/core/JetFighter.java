@@ -12,6 +12,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	private KeyHandler keyHandler;
 	private boolean hurtState;
 	private Score score;
+	private EnergyBar energyBar;
 	private Timer hurtTimer;
 	
 	public JetFighter(GameUI gameUI, KeyHandler keyHandler) {
@@ -30,6 +31,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		this.bulletType = "Bullet";
 		this.bullet = new BulletController(gameUI,300);
 		this.score = new Score(this);
+		this.energyBar = new EnergyBar(this);
 		//heart setting
 		this.heart = new Heart(this);
 		this.maxLife = 6;
@@ -91,15 +93,13 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		else if( (x+Constant.tileSize) <= 0 ) {x = Constant.screenWidth;}
 		else if( y >= Constant.screenHeight ) {y = -Constant.tileSize;}
 		
-		
 		//control key
 		if(keyHandler.upPressed == true) {y -= speed;}
 		if(keyHandler.downPressed == true) {y += speed;}
 		if(keyHandler.leftPressed == true) {x -= speed;}
 		if(keyHandler.rightPressed == true) {x += speed;}
 		if(keyHandler.spacePressed == true && bullet.canFire() && !hurtState) {
-			bullet.fireBullet(bulletType, x, y, this);
-		}
+			bullet.fireBullet(bulletType, x, y, this);}
 				
 		//When HP is 0 and will die
 		if(this.HP == 0) {
@@ -115,13 +115,20 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 			hurtState = false;
 			getImage();
 		}
+		
+		//energy bar update
+		energyBar.update();
+		if(keyHandler.vPressed == true && energyBar.getBarState()) {
+			bullet.fireBullet("SuperBullet", x, y, this); 
+			energyBar.resetEnergyBar();
+		}
 	}
 	
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(bufferedImage, x, y, width, height,null);
 		heart.draw(g2);
-		score.draw(g2);
+		energyBar.draw(g2);
 	}
 
 	@Override

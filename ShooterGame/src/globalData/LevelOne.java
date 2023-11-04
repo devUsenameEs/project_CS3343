@@ -1,8 +1,5 @@
 package globalData;
 
-
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +30,8 @@ public class LevelOne implements Level{
 
 	//Change Level
 	public void changeLevel() {
-		gameUI.changeLevel(new LevelTwo());
+		//
+		gameUI.changeLevel(new Boss());
 	}
 	
 	//LevelSetting_Design

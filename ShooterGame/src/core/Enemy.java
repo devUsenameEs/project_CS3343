@@ -64,7 +64,7 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 		}			
 		
 		//if die
-		if(HP == 0) {
+		if(HP <= 0) {
 			Updater.removeUpdateList(this);
 			Render.removeRenderableObject(this);
 		}

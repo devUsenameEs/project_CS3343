@@ -65,12 +65,16 @@ public class Bullet extends Objects implements Renderable,Updateable{
 				Enemy emy = (Enemy)collisionObj;
 				Updater.removeUpdateList(this);
 				Render.removeRenderableObject(this);
-				emy.reduceHP(1);
+				reduceHP(emy);
 				if(emy.HP == 0) {
 					JetFighter jet = (JetFighter)obj;
 					jet.addScore(100);
 				}
 		}
+	}
+	
+	public void reduceHP(Enemy emy) {
+		emy.reduceHP(1);
 	}
 
 	@Override

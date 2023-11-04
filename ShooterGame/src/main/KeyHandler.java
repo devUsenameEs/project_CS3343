@@ -7,7 +7,7 @@ import globalData.*;
 
 public class KeyHandler implements KeyListener{
 
-	public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed,enterPressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed,enterPressed,vPressed;
 	@Override
 	public void keyTyped(KeyEvent e) {}
 
@@ -33,6 +33,9 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_ENTER) {
         	enterPressed = true;
         }
+        if (code == KeyEvent.VK_V) {
+        	vPressed = true;
+        }
 	}
 
 	@Override
@@ -56,6 +59,9 @@ public class KeyHandler implements KeyListener{
         }
 		if (code == KeyEvent.VK_ENTER) {
         	enterPressed = false;
+        }
+		if (code == KeyEvent.VK_V) {
+        	vPressed = false;
         }
 	}
 
