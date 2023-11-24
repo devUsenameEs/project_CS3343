@@ -12,14 +12,15 @@ public class Bullet_Boss extends Bullet{
 
 	public Bullet_Boss(GameUI gameUI,int x, int y, Entity obj) {
 		super(gameUI,x,y,obj);
-		defaultSetting(obj);
+		defaultSetting(x,y,obj);
 		getImage();
 	}
 	
-	public void defaultSetting(Entity obj) {
-		this.width= 30;
-		this.height = 200;
-		this.y = (obj.y+obj.height)-height;
+	public void defaultSetting(int x,int y,Entity obj) {
+		this.width= 7;
+		this.height = 15;
+		this.x = x - (width/2);
+		this.y = y;
 		this.speed = 10;
 	}
 

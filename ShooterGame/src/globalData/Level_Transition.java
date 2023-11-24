@@ -44,6 +44,7 @@ public class Level_Transition implements Level{
 		Updater.update();
 		if(gameUI.gameState == gameUI.playState) {
 			if(timer.TimeToZero()) {
+				Updater.removeUpdateList(timer);
 				gameUI.changeLevel(new Level_Boss(gameUI,keyH,jet));
 			}
 		}

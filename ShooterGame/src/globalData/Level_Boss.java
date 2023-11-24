@@ -15,7 +15,6 @@ public class Level_Boss implements Level{
 	private KeyHandler keyH;
 	private JetFighter jet;
 	private Enemy_Boss boss;
-	private boolean bossIsDie;
 
 	
 	//Constructor
@@ -23,8 +22,6 @@ public class Level_Boss implements Level{
 		this.gameUI = gameUI;
 		this.keyH = keyH;
 		this.jet = jet;
-		this.bossIsDie = false;
-
 		jet.changeEnergyBarState(true);
 		LevelDesign();
 	}
@@ -37,11 +34,11 @@ public class Level_Boss implements Level{
 	@Override
 	public void update() {
 		Updater.update();
-		if(boss.checkIfDie() > 0)
+		if(boss.changeToWinnerScreen())
 			gameUI.gameState = gameUI.winState;
 	}
 	
-	public void LevelDesign() {
+	public void LevelDesign() { 
 	    roundDesign();
 	    int width = 100; int height = 100;
 		int x = (Constant.screenWidth/2) - (width/2);
