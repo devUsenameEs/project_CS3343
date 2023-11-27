@@ -1,4 +1,4 @@
-package test_enemy;
+package test
 
 import static org.junit.Assert.*;
 
