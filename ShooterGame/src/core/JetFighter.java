@@ -33,7 +33,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		this.bulletType = "Bullet";
 		this.bullet = new BulletController(gameUI,300);
 		this.score = new Score();
-		this.energyBar = new EnergyBar(this);
+		this.energyBar = new EnergyBar();
 		//heart setting
 		this.heart = new Heart(this);
 		this.maxLife = 6;
@@ -72,6 +72,11 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		return hurtState;
 	}
 	
+	
+	public void setHurt(boolean b) {
+		hurtState = b;
+	}
+	
 	public void addScore(int x) {
 		score.addScore(x);
 		System.out.println(score.getScore());
@@ -81,46 +86,72 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		bulletType = x;
 	}
 	
+	
 	public int getScore() {
 		return score.getScore();
 	}
 	
+	public void setScore(int s) {
+		score.setScore(s);
+	}
+	
 	public void changeEnergyBarState(boolean b) {
-		energyBar.changeEnergyBarState(b);
+		energyBar.setEnergyBarStateCanStore(b);
+	}
+	
+	public double getMaxlife() {
+		return maxLife;
 	}
 	
 	@Override
 	public void update() {
-		//control key
+		controlKey();
+		checkIfDie();			
+		checkIfHurt();
+		energyBarUpdate();
+	}
+	
+	public void controlKey() {
 		if(keyHandler.upPressed == true && y > 5) {y -= speed;}
 		if(keyHandler.downPressed == true && (y < Constant.screenHeight-height-5)) {y += speed;}
 		if(keyHandler.leftPressed == true && (x > 5)) {x -= speed;}
 		if(keyHandler.rightPressed == true && (x < Constant.screenWidth-width-5)) {x += speed;}
 		if(keyHandler.spacePressed == true && bullet.canFire() && !hurtState) {
 		bullet.fireBullet(bulletType, x, y, this);}
-				
-		//When HP is 0 and will die
+	}
+	
+	public void checkIfDie() {
 		if(this.HP == 0) {
 			changeImage();
 			Updater.removeUpdateList(this);
 			Render.removeRenderableObject(this);
 			gameUI.gameState = gameUI.deadState;
 		}
-
-		//getHurtState return to false
+	}
+	
+	public void checkIfHurt() {
 		if(hurtTimer != null && hurtTimer.TimeToZero()) {
 			Updater.removeUpdateList(hurtTimer);
 			hurtTimer = null;
 			hurtState = false;
 			getImage();
 		}
-		
-		//energy bar update
+	}
+	
+	public void energyBarUpdate() {
 		energyBar.update();
-		if(keyHandler.vPressed == true && energyBar.getBarState()) {
+		if(keyHandler.vPressed == true && energyBar.getEnergyIsFull()) {
 			bullet.fireBullet("SuperBullet", x, y, this); 
 			energyBar.resetEnergyBar();
 		}
+	}
+	
+	public void setContin(boolean b) {
+		score.setContinuously(b);
+	}
+	
+	public EnergyBar getEnergyBar() {
+		return energyBar;
 	}
 	
 	@Override

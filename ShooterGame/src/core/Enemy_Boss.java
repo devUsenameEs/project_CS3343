@@ -2,13 +2,8 @@ package core;
 
 import java.io.IOException;
 import java.util.Random;
-
-
 import javax.imageio.ImageIO;
-
 import globalData.Constant;
-import globalData.Render;
-import globalData.Updater;
 import main.BulletController;
 import main.GameUI;
 import main.Timer;
@@ -30,7 +25,7 @@ public class Enemy_Boss extends Enemy{
 	}
 
 	private void defaultSetting() {
-		this.maxLife = 1; 
+		this.maxLife = 30; 
 		this.HP = maxLife;
 		this.speed   = 1;
 		this.speed_x = speed;
@@ -115,7 +110,7 @@ public class Enemy_Boss extends Enemy{
 			changeImage();
 		}
 		if(HP<=0)
-			return 3334;
+			return 3343;
 		return -1;
 	}
 	

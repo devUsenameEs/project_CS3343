@@ -6,34 +6,45 @@ public class Updater {
 	private static ArrayList<Updateable> updateList = new ArrayList<Updateable>();
 	private static ArrayList<Updateable> addUpdateList = new ArrayList<Updateable>();
 	private static ArrayList<Updateable> removeUpdateList = new ArrayList<Updateable>();
+	private static Object updateListLock = new Object();
 	
 	public static void update() {
-		for(Updateable o: updateList)
-			o.update();
+		synchronized(updateListLock) {
+			for(Updateable o: updateList)
+				o.update();
 		
-		updateList.removeAll(removeUpdateList);
-		updateList.addAll(addUpdateList);
+			updateList.removeAll(removeUpdateList);
+			updateList.addAll(addUpdateList);
 		
-		addUpdateList.clear();
-		removeUpdateList.clear();
+			addUpdateList.clear();
+			removeUpdateList.clear();
+		}
 	}
 	
 	public static void addUpdateList(Updateable o) {
-		addUpdateList.add(o);
+		synchronized(updateListLock) {
+			addUpdateList.add(o);
+		}
 	}
 	
 	public static void removeUpdateList(Updateable o) {
-		removeUpdateList.add(o);
+		synchronized(updateListLock) {
+			removeUpdateList.add(o);
+		}
 	}
 
 	public static ArrayList<Updateable> getUpdateableObjects() {
-		return updateList;
+		synchronized(updateListLock) {
+			return updateList;
+		}
 	}
 	
 	public static void ClearAllUpdateableObjects() {
-		updateList.clear();
-		addUpdateList.clear();
-		removeUpdateList.clear();
+		synchronized(updateListLock) {
+			updateList.clear();
+			addUpdateList.clear();
+			removeUpdateList.clear();
+		}
 	}
 
 }

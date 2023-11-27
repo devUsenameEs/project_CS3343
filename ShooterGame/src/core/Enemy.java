@@ -68,7 +68,7 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 		checkIfDie();		
 	}
 
-	protected void checkCollision() {
+	public void checkCollision() {
 		Updateable collisionObj = isColliding(this,"jetFighter");
 		if(collisionObj != null) {
 			JetFighter obj = (JetFighter)collisionObj;
@@ -141,5 +141,13 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 	@Override
 	public double getHeight() {
 		return height;
+	}
+	
+	public double getMaxlife() {
+		return maxLife;
+	}
+
+	public double getSpeed() {
+		return speed;
 	}
 }

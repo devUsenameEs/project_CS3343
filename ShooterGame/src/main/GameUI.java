@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JPanel;
 
 import core.Background;
@@ -82,18 +81,7 @@ public class GameUI extends JPanel implements Runnable{
 		if(gameState == titleState) drawTitleScreen();
 		if(gameState == playState) drawPlayScreen();
 		if(gameState == deadState) drawEndScreen();
-		if(gameState == winState) {
-			/*
-			 * 			try {
-				wait(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			 */
-
-			drawWinnerScreen();
-		}
+		if(gameState == winState) { drawWinnerScreen();}
 		g2.dispose();
 	}
 	
@@ -125,7 +113,7 @@ public class GameUI extends JPanel implements Runnable{
 	//Draw PlayScreen
 	public void drawPlayScreen() {
 		if(startGameSetting) {
-			System.out.print("NEW GAME");
+			System.out.println("NEW GAME");
 			lv = new Level_One(this,keyHandler);
 			startGameSetting = false;
 		}
@@ -234,10 +222,6 @@ public class GameUI extends JPanel implements Runnable{
 		g2.setColor(Color.white);
 		g2.drawString(text,x,y);
 	}
-	
-	//Return GameState
-	public int getGameState() {return gameState;}
-	
 	
 	//GameThread
  	public void startGameThread() {

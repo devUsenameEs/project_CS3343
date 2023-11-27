@@ -10,6 +10,6 @@ public class TestMain {
 		public void test_main() throws Exception
 		{
 			Main main = new Main();
-			main.main(null);
+			Main.main(null);
 		}
 }

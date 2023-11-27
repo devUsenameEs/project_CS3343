@@ -43,9 +43,4 @@ public class BulletController {
 		}
 		return false;
 	}
-	
-	public void changeBulletTimer(int x) {
-			bulletTimer = new Timer(x);
-	}
-
 }

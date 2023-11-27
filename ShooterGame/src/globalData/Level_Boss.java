@@ -94,4 +94,13 @@ public class Level_Boss implements Level{
 	public int getScore() {
 		return jet.getScore();
 	}
+	
+	@Override
+	public JetFighter getJet() {
+		return jet;
+	}
+	
+	public Enemy_Boss getBoss() {
+		return boss;
+	}
 }

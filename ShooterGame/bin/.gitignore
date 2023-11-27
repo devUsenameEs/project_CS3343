@@ -1,13 +1,4 @@
-/background/
-/buff/
-/bullet/
-/core/
-/enemy/
-/energyBar/
-/font/
-/globalData/
-/heart/
-/jetFighters/
 /main/
-/obstacle_img/
 /test/
+/globalData/
+/core/

@@ -55,6 +55,11 @@ public class Level_Transition implements Level{
 		return jet.getScore();
 	}
 	
+	@Override
+	public JetFighter getJet() {
+		return jet;
+	}
+	
 	public void drawText(Graphics2D g2,String text,int _y) {
 		int shadow = 2;
 		int x = Constant.screenWidth/2 - (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth()/2;

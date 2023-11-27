@@ -34,12 +34,12 @@ public class Level_One implements Level{
 			int row = 0;
 			int x = 0;
 			int y = 0;
-			int length = 0;
+			int length = 101;
 			InputStream is = getClass().getResourceAsStream("/enemy/enemy_round01.txt");
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
+			System.out.println("Drawing Level One Map");
 			while(col < Constant.maxScreenCol && row < length) {
-				System.out.println("Drawing Level One Map");
 				String line = null;
 				try {
 					line = br.readLine();
@@ -69,6 +69,7 @@ public class Level_One implements Level{
 					row++;
 				}
 			}
+			System.out.println("Completed Drawing Level One Map");
 	}
 	
 	@Override
@@ -78,6 +79,7 @@ public class Level_One implements Level{
 			gameUI.changeLevel(new Level_Transition(gameUI,keyH,jet));
 		}
 	}
+
 	
 	@Override
 	public void draw(Graphics2D g2) {
@@ -89,5 +91,9 @@ public class Level_One implements Level{
 		return jet.getScore();
 	}
 	
+	@Override
+	public JetFighter getJet() {
+		return jet;
+	}
 
 }
