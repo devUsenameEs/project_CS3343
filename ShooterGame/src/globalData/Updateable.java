@@ -9,11 +9,13 @@ public interface Updateable {
 	
 	public default Updateable isColliding(Renderable thisObject, String otherObjID) {
 		ArrayList<Updateable> objects = Updater.getUpdateableObjects();
-		for(Updateable o: objects)
+		System.out.println("Check: " + objects.isEmpty());
+		for(Updateable o: objects) {
 			if(o.getID() == otherObjID)
 				if(thisObject.getX() < o.getRenderable().getX() + o.getRenderable().getWidth() && thisObject.getX() + thisObject.getWidth() > o.getRenderable().getX())
 					if(thisObject.getY() < o.getRenderable().getY() + o.getRenderable().getHeight() && thisObject.getY() + thisObject.getHeight() > o.getRenderable().getY())
 						return o;
+		}
 		return null;
 	}
 }

@@ -32,9 +32,9 @@ public class Obstacle extends Entity implements Renderable,Updateable{
 	public void getImage() {
 		try {
 			switch(type){
-				case "obstacle01": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/obstacle_img/obstacle03.png"));break;
-				case "obstacle02": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/obstacle_img/obstacle02.png"));break;
-				case "obstacle03": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/obstacle_img/obstacle03.png"));break;
+				case "obstacle01": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/obstacle_img/obstacle03.png"));break;
+				case "obstacle02": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/obstacle_img/obstacle02.png"));break;
+				case "obstacle03": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/obstacle_img/obstacle03.png"));break;
 			}
 		}catch(IOException e) {
 			e.printStackTrace();

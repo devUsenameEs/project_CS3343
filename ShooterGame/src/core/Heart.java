@@ -19,8 +19,8 @@ public class Heart{
 
 	public void getImage(){
 		try {
-			heartHalf  = ImageIO.read(getClass().getResourceAsStream("/heart/heart_half.png"));
-			heartFull  = ImageIO.read(getClass().getResourceAsStream("/heart/heart_full.png"));
+			heartHalf  = ImageIO.read(getClass().getResourceAsStream("/resourse/heart/heart_half.png"));
+			heartFull  = ImageIO.read(getClass().getResourceAsStream("/resourse/heart/heart_full.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

@@ -49,7 +49,7 @@ public class Enemy_Boss extends Enemy{
 	
 	private void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemy01.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/enemy/enemy01.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +57,7 @@ public class Enemy_Boss extends Enemy{
 	
 	private void changeImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemyDie.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/enemy/enemyDie.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

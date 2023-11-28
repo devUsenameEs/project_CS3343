@@ -47,7 +47,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	
 	private void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/jetFighters/jet01.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/jetFighters/jet01.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +55,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	
 	private void changeImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/jetFighters/jetGetHurt.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/jetFighters/jetGetHurt.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -170,6 +170,10 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	@Override
 	public double getHP() {
 		return this.HP;
+	}
+	
+	public String getBulletType() {
+		return bulletType;
 	}
 
 	@Override

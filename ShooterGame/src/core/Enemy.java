@@ -49,8 +49,8 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 	private void getImage() {
 		try {
 			switch(type){
-				case "enemy01": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemy01.png")); break;
-				case "enemy02": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemy02.png")); break;
+				case "enemy01": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/enemy/enemy01.png")); break;
+				case "enemy02": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/enemy/enemy02.png")); break;
 			}
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -141,5 +141,8 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 	@Override
 	public double getHeight() {
 		return height;
+	}
+	public double getSpeed() {
+		return speed;
 	}
 }

@@ -31,7 +31,7 @@ public class Buff_Heart extends Objects implements Updateable,Renderable{
 	
 	private void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/buff/heartbuff.png")); 
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/buff/heartbuff.png")); 
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

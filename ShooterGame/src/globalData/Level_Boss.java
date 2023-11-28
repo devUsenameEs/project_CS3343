@@ -55,7 +55,7 @@ public class Level_Boss implements Level{
 		int y = 0;
 		int length = 70;
 		
-		InputStream is = getClass().getResourceAsStream("/enemy/enemy_boss.txt");
+		InputStream is = getClass().getResourceAsStream("/resourse/enemy/enemy_boss.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		while(col < Constant.maxScreenCol && row < length) {
 			System.out.println("Drawing Level two Map");

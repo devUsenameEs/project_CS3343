@@ -26,7 +26,7 @@ public class Bullet_Boss extends Bullet{
 
 	public void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet01.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/bullet/bullet01.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

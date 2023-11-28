@@ -21,17 +21,21 @@ public class Buff extends Objects implements Updateable,Renderable{
 		this.y = y;
 		defaultSetting();
 		getImage();
+		
 	}
 	
 	private void defaultSetting() {
 		this.width = 32;
 		this.height = 32;
 		this.speed = 1;
+		
+		//Debug values
+		Boolean collideState = false;
 	}
 	
 	private void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/buff/bulletbuff.png")); 
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/buff/bulletbuff.png")); 
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -39,6 +43,7 @@ public class Buff extends Objects implements Updateable,Renderable{
 
 	@Override
 	public void update() {
+		System.out.println("1. Update: " + this.x + " " + this.y);
 		y += speed;
 		if(y >= Constant.screenHeight) {
 			Updater.removeUpdateList(this);
@@ -49,6 +54,7 @@ public class Buff extends Objects implements Updateable,Renderable{
 	
 	protected void checkCollision() {
 		Updateable collisionObj = isColliding(this,"jetFighter");
+		System.out.println("2. Update: " + this.x + " " + this.y);
 		if(collisionObj != null) {
 			JetFighter obj = (JetFighter)collisionObj;
 			if(obj.isGetHurt() == false) {
@@ -56,7 +62,8 @@ public class Buff extends Objects implements Updateable,Renderable{
 			}
 			Updater.removeUpdateList(this);
 			Render.removeRenderableObject(this);
-		}	
+			
+		}
 	}
 
 	@Override
@@ -93,9 +100,10 @@ public class Buff extends Objects implements Updateable,Renderable{
 	public double getWidth() {
 		return width;
 	}
-
+	
 	@Override
 	public double getHeight() {
 		return height;
 	}
+	
 }

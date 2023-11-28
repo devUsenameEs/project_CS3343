@@ -40,9 +40,9 @@ public class GameUI extends JPanel implements Runnable{
 	public GameUI() {
 		this.setPreferredSize(new Dimension(Constant.screenWidth,Constant.screenHeight));
 		this.setBackground(Color.BLACK);
-		this.start_bg = new Background(this,0, 0, "/background/start_bg.jpg");
-		this.bg1 = new Background(this,0, 0, "/background/code_bg.jpg");
-		this.bg2 = new Background(this,0, (-Constant.screenHeight),"/background/code_bg.jpg");
+		this.start_bg = new Background(this,0, 0, "/resourse/background/start_bg.jpg");
+		this.bg1 = new Background(this,0, 0, "/resourse/background/code_bg.jpg");
+		this.bg2 = new Background(this,0, (-Constant.screenHeight),"/resourse/background/code_bg.jpg");
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyHandler);
 		this.setFocusable(true);
@@ -69,14 +69,14 @@ public class GameUI extends JPanel implements Runnable{
 		super.paintComponent(g);
 		g2 = (Graphics2D)g;
 
-		try {
-			InputStream is = getClass().getResourceAsStream("/font/Retro.ttf");
-			yellowStyle = Font.createFont(Font.TRUETYPE_FONT,is);
-		}catch (FontFormatException e) {
-			e.printStackTrace();
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			InputStream is = getClass().getResourceAsStream("/font/Retro.ttf");
+//			yellowStyle = Font.createFont(Font.TRUETYPE_FONT,is);
+//		}catch (FontFormatException e) {
+//			e.printStackTrace();
+//		}catch(IOException e) {
+//			e.printStackTrace();
+//		}
 		g2.setFont(yellowStyle);
 		
 		if(gameState == titleState) drawTitleScreen();

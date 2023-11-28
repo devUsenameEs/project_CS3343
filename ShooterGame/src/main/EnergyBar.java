@@ -35,19 +35,19 @@ public class EnergyBar {
 	
 	private void getImage() {
 		try {
-			energy0  = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar0.png"));
-			energy1 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar1.png"));
-			energy2 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar2.png"));
-			energy3 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar3.png"));
-			energy4 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar4.png"));
-			energy5 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar5.png"));
+			energy0  = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar0.png"));
+			energy1 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar1.png"));
+			energy2 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar2.png"));
+			energy3 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar3.png"));
+			energy4 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar4.png"));
+			energy5 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar5.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD,15F));
+		//g2.setFont(g2.getFont().deriveFont(Font.BOLD,15F));
 		
 		if(!barIsFull && energyBarCanStore) {
 			switch(energy) {

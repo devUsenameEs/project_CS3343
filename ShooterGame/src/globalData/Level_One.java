@@ -35,7 +35,7 @@ public class Level_One implements Level{
 			int x = 0;
 			int y = 0;
 			int length = 0;
-			InputStream is = getClass().getResourceAsStream("/enemy/enemy_round01.txt");
+			InputStream is = getClass().getResourceAsStream("/resourse/enemy/enemy_round01.txt");
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
 			while(col < Constant.maxScreenCol && row < length) {

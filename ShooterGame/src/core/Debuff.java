@@ -31,7 +31,7 @@ public class Debuff extends Objects implements Updateable,Renderable{
 	
 	private void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/buff/debuff.png")); 
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/buff/debuff.png")); 
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
