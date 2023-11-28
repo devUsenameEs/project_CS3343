@@ -1,5 +1,7 @@
 package main;
 
+import java.io.IOException;
+
 import core.*;
 import globalData.Constant;
 public class BulletController {
@@ -12,7 +14,7 @@ public class BulletController {
 		bulletTimer = new Timer(x);
 	}
 	
-	public void fireBullet(String type,int x,int y,Entity obj) {
+	public void fireBullet(String type,int x,int y,Entity obj) throws IOException {
 		switch(type) {
 			case("Bullet"):
 				new Bullet(gameUI,x,y,obj);

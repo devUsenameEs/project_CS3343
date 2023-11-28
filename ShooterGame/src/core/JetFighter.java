@@ -17,7 +17,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	private boolean energyBarCanStore;
 	private Heart heart;
 	
-	public JetFighter(GameUI gameUI, KeyHandler keyHandler) {
+	public JetFighter(GameUI gameUI, KeyHandler keyHandler) throws IOException {
 		super(gameUI);
 		this.keyHandler = keyHandler;
 		Render.addRenderableObject(this);
@@ -45,23 +45,15 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		getImage();
 	}
 	
-	private void getImage() {
-		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/jetFighters/jet01.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	private void getImage() throws IOException {
+		bufferedImage = ImageIO.read(getClass().getResourceAsStream("/jetFighters/jet01.png"));
 	}
 	
-	private void changeImage() {
-		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/jetFighters/jetGetHurt.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	private void changeImage() throws IOException {
+		bufferedImage = ImageIO.read(getClass().getResourceAsStream("/jetFighters/jetGetHurt.png"));
 	}
 	
-	public void getHurt() {
+	public void getHurt() throws IOException {
 		hurtState = true;
 		score.setContinuously(false);
 		hurtTimer = new Timer(800);
@@ -73,10 +65,6 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	}
 	
 	
-	public void setHurt(boolean b) {
-		hurtState = b;
-	}
-	
 	public void addScore(int x) {
 		score.addScore(x);
 		System.out.println(score.getScore());
@@ -84,6 +72,10 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	
 	public void changeBullet(String x) {
 		bulletType = x;
+	}
+	
+	public String getBulletType() {
+		return bulletType;
 	}
 	
 	
@@ -99,19 +91,15 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		energyBar.setEnergyBarStateCanStore(b);
 	}
 	
-	public double getMaxlife() {
-		return maxLife;
-	}
-	
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		controlKey();
 		checkIfDie();			
 		checkIfHurt();
 		energyBarUpdate();
 	}
 	
-	public void controlKey() {
+	public void controlKey() throws IOException {
 		if(keyHandler.upPressed == true && y > 5) {y -= speed;}
 		if(keyHandler.downPressed == true && (y < Constant.screenHeight-height-5)) {y += speed;}
 		if(keyHandler.leftPressed == true && (x > 5)) {x -= speed;}
@@ -120,7 +108,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		bullet.fireBullet(bulletType, x, y, this);}
 	}
 	
-	public void checkIfDie() {
+	public void checkIfDie() throws IOException {
 		if(this.HP == 0) {
 			changeImage();
 			Updater.removeUpdateList(this);
@@ -129,7 +117,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		}
 	}
 	
-	public void checkIfHurt() {
+	public void checkIfHurt() throws IOException {
 		if(hurtTimer != null && hurtTimer.TimeToZero()) {
 			Updater.removeUpdateList(hurtTimer);
 			hurtTimer = null;
@@ -138,7 +126,7 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 		}
 	}
 	
-	public void energyBarUpdate() {
+	public void energyBarUpdate() throws IOException {
 		energyBar.update();
 		if(keyHandler.vPressed == true && energyBar.getEnergyIsFull()) {
 			bullet.fireBullet("SuperBullet", x, y, this); 
@@ -157,8 +145,9 @@ public class JetFighter extends Entity implements ModuleHP,Updateable,Renderable
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(bufferedImage, x, y, width, height,null);
-		heart.draw(g2);
-		score.draw(g2); 
+		if(heart!=null) heart.draw(g2);
+		if(score!=null) score.draw(g2); 
+		
 		if(energyBarCanStore)
 			energyBar.draw(g2);
 	}

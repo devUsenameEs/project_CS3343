@@ -1,9 +1,10 @@
 package globalData;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public interface Updateable {
-	public void update();
+	public void update() throws IOException;
 	public String getID();
 	public Renderable getRenderable();
 	

@@ -2,6 +2,8 @@ package globalData;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.IOException;
+
 import core.JetFighter;
 import main.GameUI;
 import main.KeyHandler;
@@ -14,18 +16,20 @@ public class Level_Transition implements Level{
 	private KeyHandler keyH;
 	private JetFighter jet;
 	private Timer timer;
+	private int time;
 
-	public Level_Transition(GameUI gameUI,KeyHandler keyH,JetFighter jet) {
+	public Level_Transition(GameUI gameUI,KeyHandler keyH,JetFighter jet, int time) {
 		this.gameUI = gameUI;
 		this.keyH = keyH;
 		this.jet = jet;
 		this.jet.changeEnergyBarState(false);
+		this.time = time;
 		LevelDesign();
 	}
 	
 	@Override
 	public void LevelDesign() {
-		timer = new Timer(500);
+		timer = new Timer(time);
 	}
 
 	@Override
@@ -40,7 +44,7 @@ public class Level_Transition implements Level{
 	}
 
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		Updater.update();
 		if(gameUI.gameState == gameUI.playState) {
 			if(timer.TimeToZero()) {

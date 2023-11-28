@@ -16,7 +16,7 @@ public class EnergyBar {
 	private int x,y,width,height;
 	private boolean energyBarCanStore;
 	
-	public EnergyBar() {
+	public EnergyBar() throws IOException {
 		energy = 0;
 		barIsFull = false;
 		energyBarCanStore = true;
@@ -28,17 +28,13 @@ public class EnergyBar {
 		getImage();
 	}
 	
-	private void getImage() {
-		try {
-			energy0 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar0.png"));
-			energy1 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar1.png"));
-			energy2 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar2.png"));
-			energy3 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar3.png"));
-			energy4 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar4.png"));
-			energy5 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar5.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	private void getImage() throws IOException {
+		energy0 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar0.png"));
+		energy1 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar1.png"));
+		energy2 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar2.png"));
+		energy3 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar3.png"));
+		energy4 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar4.png"));
+		energy5 = ImageIO.read(getClass().getResourceAsStream("/energyBar/energy_bar5.png"));
 	}
 
 	public void draw(Graphics2D g2) {
@@ -100,5 +96,9 @@ public class EnergyBar {
 	
 	public void resetEnergyBar() {
 		barIsFull = false;
+	}
+	
+	public int getEnergy() {
+		return energy;
 	}
 }

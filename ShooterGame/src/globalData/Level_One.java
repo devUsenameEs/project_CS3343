@@ -16,7 +16,7 @@ public class Level_One implements Level{
 	private JetFighter jet;
 	
 	//Constructor
-	public Level_One(GameUI gameUI,KeyHandler keyH){
+	public Level_One(GameUI gameUI,KeyHandler keyH) throws IOException{
 		Render.clearRenderableObject();
 		Updater.ClearAllUpdateableObjects();
 		this.gameUI = gameUI;
@@ -26,7 +26,7 @@ public class Level_One implements Level{
 
 	
 	@Override
-	public void LevelDesign(){	
+	public void LevelDesign() throws IOException{	
 			jet = new JetFighter(gameUI,keyH);
 			//Setting Map
 			int eSize = 32;
@@ -41,11 +41,7 @@ public class Level_One implements Level{
 			System.out.println("Drawing Level One Map");
 			while(col < Constant.maxScreenCol && row < length) {
 				String line = null;
-				try {
-					line = br.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				line = br.readLine();
 				while(col < Constant.maxScreenCol){
 					String numbers[] = line.split(" ");
 					int num = Integer.parseInt(numbers[col]);
@@ -73,13 +69,12 @@ public class Level_One implements Level{
 	}
 	
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		Updater.update();
-		if(Render.RenderListIsEmpty()) {
-			gameUI.changeLevel(new Level_Transition(gameUI,keyH,jet));
+		if(Render.RenderListIsEmpty() == 1) {
+			gameUI.changeLevel(new Level_Transition(gameUI,keyH,jet,2000));
 		}
 	}
-
 	
 	@Override
 	public void draw(Graphics2D g2) {

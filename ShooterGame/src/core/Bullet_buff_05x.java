@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class Bullet_buff_05x extends Bullet{
 		
-	public Bullet_buff_05x(GameUI gameUI,int x, int y, Entity obj) {
+	public Bullet_buff_05x(GameUI gameUI,int x, int y, Entity obj) throws IOException {
 		super(gameUI,x,y,obj);
 		defaultSetting();
 		getImage();

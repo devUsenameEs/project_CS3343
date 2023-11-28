@@ -9,7 +9,7 @@ import main.GameUI;
 
 public class Background extends Objects{
 	
-	public Background(GameUI gameUI,int x, int y, String path) {		
+	public Background(GameUI gameUI,int x, int y, String path) throws IOException {		
 		super(gameUI);
 		this.x = x;
 		this.y = y;
@@ -19,12 +19,8 @@ public class Background extends Objects{
 		getImage(path);
 	}
 	
-	public void getImage(String path) {
-		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream(path));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	public void getImage(String path) throws IOException {
+		bufferedImage = ImageIO.read(getClass().getResourceAsStream(path));
 	}
 	
 	public void draw(Graphics2D g2) {

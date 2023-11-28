@@ -1,5 +1,6 @@
 package globalData;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Updater {
@@ -8,7 +9,7 @@ public class Updater {
 	private static ArrayList<Updateable> removeUpdateList = new ArrayList<Updateable>();
 	private static Object updateListLock = new Object();
 	
-	public static void update() {
+	public static void update() throws IOException {
 		synchronized(updateListLock) {
 			for(Updateable o: updateList)
 				o.update();
@@ -45,6 +46,14 @@ public class Updater {
 			addUpdateList.clear();
 			removeUpdateList.clear();
 		}
+	}
+	
+	public static int UpdaterListIsEmpty() {
+		return updateList.size();
+	}
+	
+	public static boolean containsUpdateableObject(Updateable o) {
+		return updateList.contains(o);
 	}
 
 }

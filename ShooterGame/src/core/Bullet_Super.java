@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 
 public class Bullet_Super extends Bullet {
-    public Bullet_Super(GameUI gameUI, int x, int y,Entity obj) {
+    public Bullet_Super(GameUI gameUI, int x, int y,Entity obj) throws IOException {
         super(gameUI, x, y, obj);
     }
 

@@ -18,7 +18,7 @@ public class Level_Boss implements Level{
 
 	
 	//Constructor
-	public Level_Boss(GameUI gameUI,KeyHandler keyH,JetFighter jet){
+	public Level_Boss(GameUI gameUI,KeyHandler keyH,JetFighter jet) throws IOException{
 		this.gameUI = gameUI;
 		this.keyH = keyH;
 		this.jet = jet;
@@ -32,13 +32,13 @@ public class Level_Boss implements Level{
 	}
 
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		Updater.update();
 		if(boss.changeToWinnerScreen())
 			gameUI.gameState = gameUI.winState;
 	}
 	
-	public void LevelDesign() { 
+	public void LevelDesign() throws IOException { 
 	    roundDesign();
 	    int width = 100; int height = 100;
 		int x = (Constant.screenWidth/2) - (width/2);
@@ -46,7 +46,7 @@ public class Level_Boss implements Level{
 		boss = new Enemy_Boss(gameUI,x,y,"boss");
 	}
 	
-	public void roundDesign() {
+	public void roundDesign() throws IOException {
 		//Round
 		int eSize = 32;
 		int col = 0;
@@ -57,14 +57,10 @@ public class Level_Boss implements Level{
 		
 		InputStream is = getClass().getResourceAsStream("/enemy/enemy_boss.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		System.out.println("Drawing Boss Map");
 		while(col < Constant.maxScreenCol && row < length) {
-			System.out.println("Drawing Level two Map");
 			String line = null;
-			try {
-				line = br.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			line = br.readLine();
 			while(col < Constant.maxScreenCol){
 				String numbers[] = line.split(" ");
 				int num = Integer.parseInt(numbers[col]);
@@ -87,7 +83,7 @@ public class Level_Boss implements Level{
 				row++;
 			}
 		}
-		
+		System.out.println("Finish drawing Boss Map");
 	}
 
 	@Override

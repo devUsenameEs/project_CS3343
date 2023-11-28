@@ -33,12 +33,12 @@ public class Render {
 			renderList.clear();
 		}
 	}
-	public static int getNum() {
-		return renderList.size() ;
+
+	public static int RenderListIsEmpty() {
+		return renderList.size();
 	}
-	public static boolean RenderListIsEmpty() {
-		if(renderList.size() == 1)
-			return true;
-		return false;
+	
+	public static boolean containsRenderableObject(Renderable o) {
+		return renderList.contains(o);
 	}
 }

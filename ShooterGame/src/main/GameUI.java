@@ -36,7 +36,7 @@ public class GameUI extends JPanel implements Runnable{
 	private Background bg2;
 	
 	//Constructor Setting
-	public GameUI() {
+	public GameUI() throws IOException {
 		this.setPreferredSize(new Dimension(Constant.screenWidth,Constant.screenHeight));
 		this.setBackground(Color.BLACK);
 		this.start_bg = new Background(this,0, 0, "/background/start_bg.jpg");
@@ -55,7 +55,7 @@ public class GameUI extends JPanel implements Runnable{
 	}
 	
 	//Update The Window
-	public void update() {
+	public void update() throws IOException {
 		if(gameState == playState && lv != null) {
 			bg1.update();
 			bg2.update();
@@ -64,22 +64,25 @@ public class GameUI extends JPanel implements Runnable{
 	}
 	
 	//Drawing The Window
-	public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g2 = (Graphics2D)g;
 
+		InputStream is = getClass().getResourceAsStream("/font/Retro.ttf");
 		try {
-			InputStream is = getClass().getResourceAsStream("/font/Retro.ttf");
 			yellowStyle = Font.createFont(Font.TRUETYPE_FONT,is);
-		}catch (FontFormatException e) {
-			e.printStackTrace();
-		}catch(IOException e) {
+		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 		}
 		g2.setFont(yellowStyle);
 		
 		if(gameState == titleState) drawTitleScreen();
-		if(gameState == playState) drawPlayScreen();
+		if(gameState == playState)
+			try {
+				drawPlayScreen();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		if(gameState == deadState) drawEndScreen();
 		if(gameState == winState) { drawWinnerScreen();}
 		g2.dispose();
@@ -111,7 +114,7 @@ public class GameUI extends JPanel implements Runnable{
 	}
 
 	//Draw PlayScreen
-	public void drawPlayScreen() {
+	public void drawPlayScreen() throws IOException {
 		if(startGameSetting) {
 			System.out.println("NEW GAME");
 			lv = new Level_One(this,keyHandler);
@@ -223,28 +226,32 @@ public class GameUI extends JPanel implements Runnable{
 		g2.drawString(text,x,y);
 	}
 	
-	//GameThread
- 	public void startGameThread() {
+	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
+	
 	@Override
 	public void run() {
-		double drawInterval = 1000000000/Constant.FPS; //60FPS
-		double delta = 0;
-		long lastTime = System.nanoTime();
-		long currentTime;
-		
-		while(gameThread != null) {
-			currentTime = System.nanoTime();
-			delta += (currentTime - lastTime) / drawInterval;
-			lastTime = currentTime;
+			double drawInterval = 1000000000/Constant.FPS; //60FPS
+			double delta = 0;
+			long lastTime = System.nanoTime();
+			long currentTime;
 			
-			if(delta>=1) {
-				update();
-				repaint();
-				delta--;
-			}
+			while(gameThread != null) {
+				currentTime = System.nanoTime();
+				delta += (currentTime - lastTime) / drawInterval;
+				lastTime = currentTime;
+				
+				if(delta>=1) {
+					try {
+						update();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					repaint();
+					delta--;
+				}
 		}
 	}
 }
