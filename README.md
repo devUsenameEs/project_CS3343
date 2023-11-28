@@ -1,4 +1,4 @@
-# Still struggling with Eclipse... 
-me will go home check if test cases reli works 
+# My Eclipse is back
+ pls dont merge it yet not finished ar
 
-so now pls dont merge it yet 
+and also if finally need merge be careful since have changed image paths
