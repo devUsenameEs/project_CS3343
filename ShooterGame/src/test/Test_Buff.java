@@ -44,7 +44,7 @@ public class Test_Buff {
 		int x = 100;
 		int y = 1000;
 
-		// Create an Obstacle object
+		// Create a Buff object
 		Buff buff = new Buff(gameUI, x, y);
 
 		// Call the update method
