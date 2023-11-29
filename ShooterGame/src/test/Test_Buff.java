@@ -73,7 +73,7 @@ public class Test_Buff {
 		Updater.update();	//Add jet and buff into update_list for collision detection
 		buff.update();
 
-		// Check if can change into Bullet_Buff after jet collide with buff
+		// Check if jet's bulletType can change into Bullet_Buff after jet collides with buff
 		assertEquals(jet.getBulletType(), "Bullet_Buff");
 	}
 	
