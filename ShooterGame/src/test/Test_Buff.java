@@ -24,7 +24,7 @@ public class Test_Buff {
 		int x = 100;
 		int y = 200;
 
-		// Create an Obstacle object
+		// Create a Buff object
 		Buff buff = new Buff(gameUI, x, y);
 
 		// Verify that the x and y coordinates were set correctly
@@ -66,7 +66,7 @@ public class Test_Buff {
 		int x = Constant.screenWidth/2 - (Constant.tileSize/2);
 		int y = Constant.screenHeight/2 + (Constant.tileSize*3) - 1;
 		
-		// Create an Obstacle object
+		// Create a Buff object
 		Buff buff = new Buff(gameUI, x, y);
 
 		// Call the update method
@@ -86,7 +86,7 @@ public class Test_Buff {
 		int x = 100;
 		int y = 1000;
 
-		// Create an Obstacle object
+		// Create a Buff object
 		Buff buff = new Buff(gameUI, x, y);
 
 		// Call the update method
@@ -103,7 +103,7 @@ public class Test_Buff {
 		int x = 100;
 		int y = 1000;
 
-		// Create an Obstacle object
+		// Create a Buff object
 		Buff buff = new Buff(gameUI, x, y);
 
 		// Set up a BufferedImage
