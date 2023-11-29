@@ -70,7 +70,7 @@ public class Test_Debuff {
 		Debuff debuff = new Debuff(gameUI, x, y);
 
 		// Call the update method
-		Updater.update();	//Add jet and debuff into update_list for collision detection
+		Updater.update();	//Add jet and debuff into updateList for collision detection
 		debuff.update();
 
 		// Check if jet's bulletType can change into Bullet_Debuff after jet collides with buff
