@@ -59,21 +59,18 @@ public class Test_Buff {
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 		
-		//for no reason it is needed to cover the checkCollision
+		//The target JetFighter to be collide with Buff
 		JetFighter jet = new JetFighter(gameUI, gameUI.keyHandler);
 
 		// Define test values
 		int x = Constant.screenWidth/2 - (Constant.tileSize/2);
 		int y = Constant.screenHeight/2 + (Constant.tileSize*3) - 1;
-
-//		System.out.println("Initial: " + x + " " + y);
-//		System.out.println("Jet: " + jet.getX() + " " + jet.getY());
 		
 		// Create an Obstacle object
 		Buff buff = new Buff(gameUI, x, y);
 
 		// Call the update method
-		Updater.update();
+		Updater.update();	//Add jet and buff into update_list for collision detection
 		buff.update();
 
 		// Check if can change into Bullet_Buff after jet collide with buff
