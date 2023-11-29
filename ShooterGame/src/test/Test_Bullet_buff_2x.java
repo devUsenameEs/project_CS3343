@@ -20,7 +20,7 @@ public class Test_Bullet_buff_2x {
 		int x = 100;
 		int y = 200;
 
-		// Create a Buff_Heart object
+		// Create a Bullet_buff_2x object
 		Bullet_buff_2x bullet_buff_2x = new Bullet_buff_2x(gameUI, x, y, entity);
 
 		// Verify that the x and y coordinates were set correctly
