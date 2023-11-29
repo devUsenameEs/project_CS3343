@@ -70,7 +70,7 @@ public class Test_Buff {
 		Buff buff = new Buff(gameUI, x, y);
 
 		// Call the update method
-		Updater.update();	//Add jet and buff into update_list for collision detection
+		Updater.update();	//Add jet and buff into updateList for collision detection
 		buff.update();
 
 		// Check if jet's bulletType can change into Bullet_Buff after jet collides with buff
