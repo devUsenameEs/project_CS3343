@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 public class Bullet_buff_2x extends Bullet{
 	
 	
-	public Bullet_buff_2x(GameUI gameUI,int x, int y, Entity obj) throws IOException {
+	public Bullet_buff_2x(GameUI gameUI,int x, int y, Entity obj) {
 		super(gameUI,x,y,obj);
 		defaultSetting();
 		getImage();
@@ -23,10 +23,14 @@ public class Bullet_buff_2x extends Bullet{
 
 	public void getImage() {
 		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet01.png"));
+			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/bullet/bullet01.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public String getID() {
+		return "bullet_buff_2x"; 
 	}
 
 }
