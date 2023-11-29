@@ -18,7 +18,7 @@ public class Main {
 		//Create The Window Frame
 		window = new JFrame();
 		window.setTitle("CityU Shooter Game");
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		window.setResizable(false);
 			
 		gameUI = new GameUI();
