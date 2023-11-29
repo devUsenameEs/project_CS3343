@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ import main.GameUI;
 public class Test_Debuff {
 
 	@Test
-	public void testGetImage() {
+	public void testGetImage() throws IOException{
 		GameUI gameUI = new GameUI();
 
 		// Define test values
@@ -36,7 +37,7 @@ public class Test_Debuff {
 	}
 	
 	@Test
-	public void testDebuffUpdate() {
+	public void testDebuffUpdate() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
@@ -55,7 +56,7 @@ public class Test_Debuff {
 	}
 	
 	@Test
-	public void testDebuffCollision() {
+	public void testDebuffCollision() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 		
@@ -70,7 +71,7 @@ public class Test_Debuff {
 		Debuff debuff = new Debuff(gameUI, x, y);
 
 		// Call the update method
-		Updater.update();	//Add jet and debuff into updateList for collision detection
+		Updater.update();	//Add jet and debuff into update_list for collision detection
 		debuff.update();
 
 		// Check if jet's bulletType can change into Bullet_Debuff after jet collides with buff
@@ -78,7 +79,7 @@ public class Test_Debuff {
 	}
 	
 	@Test
-	public void TestDebuffRenderable() {
+	public void TestDebuffRenderable() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
@@ -95,7 +96,7 @@ public class Test_Debuff {
 	}
 	
 	@Test
-	public void TestDebuff_Draw() {
+	public void TestDebuff_Draw() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 

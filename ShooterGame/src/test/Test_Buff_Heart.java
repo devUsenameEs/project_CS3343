@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ import main.GameUI;
 public class Test_Buff_Heart {
 
 	@Test
-	public void testGetImage() {
+	public void testGetImage() throws IOException{
 		GameUI gameUI = new GameUI();
 
 		// Define test values
@@ -36,7 +37,7 @@ public class Test_Buff_Heart {
 	}
 	
 	@Test
-	public void testBuffHeartUpdate() {
+	public void testBuffHeartUpdate() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
@@ -55,7 +56,7 @@ public class Test_Buff_Heart {
 	}
 	
 	@Test
-	public void testBuffHeartCollision() {
+	public void testBuffHeartCollision() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 		
@@ -72,7 +73,7 @@ public class Test_Buff_Heart {
 		Buff_Heart buffHeart = new Buff_Heart(gameUI, x, y);
 
 		// Call the update method
-		Updater.update();	//Add jet and buffHeart into updateList for collision detection
+		Updater.update();	//Add jet and buffHeart into update_list for collision detection
 		buffHeart.update();
 
 		// Check whether jet's HP has changed from 4 to 5 after collision
@@ -80,7 +81,7 @@ public class Test_Buff_Heart {
 	}
 	
 	@Test
-	public void TestBuffHeartRenderable() {
+	public void TestBuffHeartRenderable() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
@@ -97,7 +98,7 @@ public class Test_Buff_Heart {
 	}
 	
 	@Test
-	public void TestBuffHeart_Draw() {
+	public void TestBuffHeart_Draw() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ import main.GameUI;
 public class Test_Buff {
 
 	@Test
-	public void testGetImage() {
+	public void testGetImage() throws IOException{
 		GameUI gameUI = new GameUI();
 
 		// Define test values
@@ -36,7 +37,7 @@ public class Test_Buff {
 	}
 	
 	@Test
-	public void testBuffUpdate() {
+	public void testBuffUpdate() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
@@ -50,12 +51,12 @@ public class Test_Buff {
 		// Call the update method
 		buff.update();
 
-		// Verify that the enemy has moved out of the screen
+		// Verify that buff has moved out of the screen
 		assertTrue(buff.getY() >= Constant.screenHeight);
 	}
 	
 	@Test
-	public void testBuffCollision() {
+	public void testBuffCollision() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 		
@@ -64,13 +65,13 @@ public class Test_Buff {
 
 		// Define test values
 		int x = Constant.screenWidth/2 - (Constant.tileSize/2);
-		int y = Constant.screenHeight/2 + (Constant.tileSize*3) - 1;
+		int y = Constant.screenHeight/2 + (Constant.tileSize*3);
 		
 		// Create a Buff object
 		Buff buff = new Buff(gameUI, x, y);
 
 		// Call the update method
-		Updater.update();	//Add jet and buff into updateList for collision detection
+		Updater.update();	//Add jet and buff into update_list for collision detection
 		buff.update();
 
 		// Check if jet's bulletType can change into Bullet_Buff after jet collides with buff
@@ -78,7 +79,7 @@ public class Test_Buff {
 	}
 	
 	@Test
-	public void TestBuffRenderable() {
+	public void TestBuffRenderable() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
@@ -95,7 +96,7 @@ public class Test_Buff {
 	}
 	
 	@Test
-	public void TestBuff_Draw() {
+	public void TestBuff_Draw() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
