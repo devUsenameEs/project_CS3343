@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ import main.GameUI;
 public class Test_Buff {
 
 	@Test
-	public void testGetImage() {
+	public void testGetImage() throws IOException{
 		GameUI gameUI = new GameUI();
 
 		// Define test values
@@ -36,7 +37,7 @@ public class Test_Buff {
 	}
 	
 	@Test
-	public void testBuffUpdate() {
+	public void testBuffUpdate() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
@@ -55,7 +56,7 @@ public class Test_Buff {
 	}
 	
 	@Test
-	public void testBuffCollision() {
+	public void testBuffCollision() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 		
@@ -78,7 +79,7 @@ public class Test_Buff {
 	}
 	
 	@Test
-	public void TestBuffRenderable() {
+	public void TestBuffRenderable() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
@@ -95,7 +96,7 @@ public class Test_Buff {
 	}
 	
 	@Test
-	public void TestBuff_Draw() {
+	public void TestBuff_Draw() throws IOException{
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
