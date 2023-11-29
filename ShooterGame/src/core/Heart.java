@@ -12,18 +12,14 @@ public class Heart{
 	private JetFighter jet;
 	private BufferedImage heartHalf,heartFull;
 	
-	public Heart(JetFighter jet) {
+	public Heart(JetFighter jet) throws IOException {
 		this.jet = jet;
 		getImage();
 	}
 
-	public void getImage(){
-		try {
-			heartHalf  = ImageIO.read(getClass().getResourceAsStream("/resourse/heart/heart_half.png"));
-			heartFull  = ImageIO.read(getClass().getResourceAsStream("/resourse/heart/heart_full.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	public void getImage() throws IOException{
+		heartHalf  = ImageIO.read(getClass().getResourceAsStream("/resourse/heart/heart_half.png"));
+		heartFull  = ImageIO.read(getClass().getResourceAsStream("/resourse/heart/heart_full.png"));
 	}
 	
 	public void draw(Graphics2D g2) {

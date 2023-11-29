@@ -15,7 +15,7 @@ public class Bullet extends Objects implements Renderable,Updateable{
 	protected Entity entity;
 	protected double AP;
 	
-	public Bullet(GameUI gameUI,int x, int y, Entity obj) {
+	public Bullet(GameUI gameUI,int x, int y, Entity obj) throws IOException {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
@@ -33,12 +33,8 @@ public class Bullet extends Objects implements Renderable,Updateable{
 		this.AP = 1;
 	}
 
-	public void getImage() {
-		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/bullet/bullet01.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	public void getImage() throws IOException {
+		bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet01.png"));
 	}
 	
 	@Override
@@ -52,7 +48,7 @@ public class Bullet extends Objects implements Renderable,Updateable{
 	}
 	
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		y -= speed;
 		if(y <= 0) {
 			Updater.removeUpdateList(this);
@@ -61,7 +57,7 @@ public class Bullet extends Objects implements Renderable,Updateable{
 		checkCollision();
 	}
 	
-	private void checkCollision() {
+	private void checkCollision() throws IOException {
 		Updateable collisionObj = isColliding(this,"enemy");
 		if(collisionObj != null) {
 				Enemy enemy = (Enemy)collisionObj;
@@ -105,5 +101,13 @@ public class Bullet extends Objects implements Renderable,Updateable{
 	@Override
 	public double getHeight() {
 		return height;
+	}
+	
+	public double getSpeed() {
+		return speed;
+	}
+
+	public double getAP() {
+		return AP;
 	}
 }

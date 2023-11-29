@@ -5,14 +5,10 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
-import core.JetFighter;
 import globalData.Constant;
 
 public class EnergyBar {
-	private JetFighter jet;
 	private int energy;
 	private boolean barIsFull;
 	private Timer timer;
@@ -20,8 +16,7 @@ public class EnergyBar {
 	private int x,y,width,height;
 	private boolean energyBarCanStore;
 	
-	public EnergyBar(JetFighter jet) {
-		this.jet = jet;
+	public EnergyBar() throws IOException {
 		energy = 0;
 		barIsFull = false;
 		energyBarCanStore = true;
@@ -33,21 +28,17 @@ public class EnergyBar {
 		getImage();
 	}
 	
-	private void getImage() {
-		try {
-			energy0  = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar0.png"));
-			energy1 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar1.png"));
-			energy2 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar2.png"));
-			energy3 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar3.png"));
-			energy4 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar4.png"));
-			energy5 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar5.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	private void getImage() throws IOException {
+		energy0 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar0.png"));
+		energy1 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar1.png"));
+		energy2 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar2.png"));
+		energy3 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar3.png"));
+		energy4 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar4.png"));
+		energy5 = ImageIO.read(getClass().getResourceAsStream("/resourse/energyBar/energy_bar5.png"));
 	}
 
 	public void draw(Graphics2D g2) {
-		//g2.setFont(g2.getFont().deriveFont(Font.BOLD,15F));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD,15F));
 		
 		if(!barIsFull && energyBarCanStore) {
 			switch(energy) {
@@ -56,7 +47,7 @@ public class EnergyBar {
 				case 2: g2.drawImage(energy2, x, y, width,height,null);break;
 				case 3: g2.drawImage(energy3, x, y, width,height,null);break;
 				case 4: g2.drawImage(energy4, x, y, width,height,null);break;
-			}
+			} 
 		}
 		else if(barIsFull) {
 			
@@ -91,11 +82,15 @@ public class EnergyBar {
 		}
 	}
 	
-	public boolean getEnergyBarState() {
+	public boolean getEnergyBarStateCanStore() {
 		return energyBarCanStore;
 	}
 	
-	public void changeEnergyBarState(boolean b) {
+	public boolean getEnergyIsFull() {
+		return barIsFull;
+	}
+	
+	public void setEnergyBarStateCanStore(boolean b) {
 		energyBarCanStore = b;
 	}
 	
@@ -103,7 +98,7 @@ public class EnergyBar {
 		barIsFull = false;
 	}
 	
-	public boolean getBarState() {
-		return barIsFull;
+	public int getEnergy() {
+		return energy;
 	}
 }

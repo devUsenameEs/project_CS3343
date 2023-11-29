@@ -2,13 +2,8 @@ package core;
 
 import java.io.IOException;
 import java.util.Random;
-
-
 import javax.imageio.ImageIO;
-
 import globalData.Constant;
-import globalData.Render;
-import globalData.Updater;
 import main.BulletController;
 import main.GameUI;
 import main.Timer;
@@ -23,14 +18,14 @@ public class Enemy_Boss extends Enemy{
 	private boolean flag;
 	private Timer timer;
 
-	public Enemy_Boss(GameUI gameUI, int x, int y, String type) {
+	public Enemy_Boss(GameUI gameUI, int x, int y, String type) throws IOException {
 		super(gameUI, x, y, type);
 		defaultSetting();
 		getImage();
 	}
 
 	private void defaultSetting() {
-		this.maxLife = 1; 
+		this.maxLife = 30; 
 		this.HP = maxLife;
 		this.speed   = 1;
 		this.speed_x = speed;
@@ -47,25 +42,17 @@ public class Enemy_Boss extends Enemy{
 		randomRight = random.nextInt(Constant.screenWidth/2+1)+Constant.screenWidth/2;
 	}
 	
-	private void getImage() {
-		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/enemy/enemy01.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	private void getImage() throws IOException {
+		bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemy01.png"));
 	}
 	
-	private void changeImage() {
-		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/enemy/enemyDie.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	private void changeImage() throws IOException {
+		bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemyDie.png"));
 	}
 
 	
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		x += speed_x;
 		y += speed_y;
 		if(speed_x > 0) {  
@@ -96,7 +83,7 @@ public class Enemy_Boss extends Enemy{
 		changeToWinnerScreen();
 	}
 	
-	public void letBullet() {
+	public void letBullet() throws IOException {
 		if(bullet.canFire())
 			bullet.fireBullet(bulletType, x+(width/2), y+(height), this);
 		
@@ -108,14 +95,14 @@ public class Enemy_Boss extends Enemy{
 		return false;
 	}
 
-	public int checkIfDie() {
+	public int checkIfDie() throws IOException {
 		if(HP <= 0 && flag) {
 			timer = new Timer(1500);
 			flag =  false;
 			changeImage();
 		}
 		if(HP<=0)
-			return 3334;
+			return 3343;
 		return -1;
 	}
 	

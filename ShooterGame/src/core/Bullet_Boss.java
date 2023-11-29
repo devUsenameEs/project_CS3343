@@ -10,7 +10,7 @@ import globalData.Updater;
 
 public class Bullet_Boss extends Bullet{
 
-	public Bullet_Boss(GameUI gameUI,int x, int y, Entity obj) {
+	public Bullet_Boss(GameUI gameUI,int x, int y, Entity obj) throws IOException {
 		super(gameUI,x,y,obj);
 		defaultSetting(x,y,obj);
 		getImage();
@@ -24,16 +24,12 @@ public class Bullet_Boss extends Bullet{
 		this.speed = 10;
 	}
 
-	public void getImage() {
-		try {
-			bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/bullet/bullet01.png"));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+	public void getImage() throws IOException {
+		bufferedImage = ImageIO.read(getClass().getResourceAsStream("/bullet/bullet01.png"));
 	}
 
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		y += speed;
 		if(y>=Constant.screenHeight) {
 			Updater.removeUpdateList(this);
@@ -42,7 +38,7 @@ public class Bullet_Boss extends Bullet{
 		checkCollision();	
 	}
 	
-	private void checkCollision() {
+	private void checkCollision() throws IOException {
 		Updateable collisionObj = isColliding(this,"jetFighter");
 		if(collisionObj != null) {
 			JetFighter obj = (JetFighter)collisionObj;

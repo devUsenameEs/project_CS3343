@@ -14,7 +14,7 @@ import main.GameUI;
 public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 	private String type;
 
-	public Enemy(GameUI gameUI,int x,int y,String type) {
+	public Enemy(GameUI gameUI,int x,int y,String type) throws IOException {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
@@ -46,19 +46,15 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 		}
 	}
 
-	private void getImage() {
-		try {
-			switch(type){
-				case "enemy01": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/enemy/enemy01.png")); break;
-				case "enemy02": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/enemy/enemy02.png")); break;
-			}
-		}catch(IOException e) {
-			e.printStackTrace();
+	private void getImage() throws IOException {
+		switch(type){
+			case "enemy01": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemy01.png")); break;
+			case "enemy02": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/enemy/enemy02.png")); break;
 		}
 	}
 	
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		y += speed;
 		if(y >= Constant.screenHeight) {
 			Updater.removeUpdateList(this);
@@ -68,7 +64,7 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 		checkIfDie();		
 	}
 
-	protected void checkCollision() {
+	public void checkCollision() throws IOException {
 		Updateable collisionObj = isColliding(this,"jetFighter");
 		if(collisionObj != null) {
 			JetFighter obj = (JetFighter)collisionObj;
@@ -79,7 +75,7 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 		}	
 	}
 
-	public int checkIfDie() {
+	public int checkIfDie() throws IOException {
 		if(HP <= 0) {
 			Updater.removeUpdateList(this);
 			Render.removeRenderableObject(this);
@@ -142,6 +138,11 @@ public class Enemy extends Entity implements ModuleHP,Updateable,Renderable{
 	public double getHeight() {
 		return height;
 	}
+	
+	public double getMaxlife() {
+		return maxLife;
+	}
+
 	public double getSpeed() {
 		return speed;
 	}

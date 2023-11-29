@@ -18,7 +18,7 @@ public class KeyHandler implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 		
-		if(gameUI.getGameState() == gameUI.titleState || gameUI.getGameState() == gameUI.deadState || gameUI.getGameState() == gameUI.winState) {
+		if(gameUI.gameState == gameUI.titleState || gameUI.gameState == gameUI.deadState || gameUI.gameState == gameUI.winState) {
 			if (code == KeyEvent.VK_UP) {
 				if (gameUI.commandNum == 1) gameUI.commandNum = 0; else gameUI.commandNum = 1;
 			}
@@ -34,7 +34,7 @@ public class KeyHandler implements KeyListener{
 		}
 		
 		
-		if(gameUI.getGameState() == gameUI.playState) {
+		if(gameUI.gameState == gameUI.playState) {
 			if (code == KeyEvent.VK_DOWN) {
 				downPressed = true;
 			}

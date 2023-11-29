@@ -1,20 +1,24 @@
 package main;
 
+import java.io.IOException;
+
 import javax.swing.JFrame;
 
 public class Main {
 	
 	public static GameUI gameUI;
+	public static JFrame window;
 
-	public static void main(String[] args) {
-		init();
+	public static void main(String[] args) throws IOException {
+		initScreen();
+		initThread();
 	}
 	
-	public static void init() {
+	public static void initScreen() throws IOException {
 		//Create The Window Frame
-		JFrame window = new JFrame();
+		window = new JFrame();
 		window.setTitle("CityU Shooter Game");
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		window.setResizable(false);
 			
 		gameUI = new GameUI();
@@ -22,9 +26,10 @@ public class Main {
 		window.pack();
 		
 		window.setLocationRelativeTo(null);
-		window.setVisible(true);
-		
-		//Looping Game
+		window.setVisible(true);	
+	}
+	
+	public static void initThread() {
 		gameUI.startGameThread();
 	}
 }

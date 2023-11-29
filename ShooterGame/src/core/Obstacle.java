@@ -12,7 +12,7 @@ public class Obstacle extends Entity implements Renderable,Updateable{
 	private String type;
 	Timer timer;
 	
-	public Obstacle(GameUI gameUI,int x,int y,String type) {
+	public Obstacle(GameUI gameUI,int x,int y,String type) throws IOException {
 		super(gameUI);
 		Render.addRenderableObject(this);
 		Updater.addUpdateList(this);
@@ -29,17 +29,14 @@ public class Obstacle extends Entity implements Renderable,Updateable{
 		this.speed = 1;
 	}
 	
-	public void getImage() {
-		try {
-			switch(type){
-				case "obstacle01": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/obstacle_img/obstacle03.png"));break;
-				case "obstacle02": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/obstacle_img/obstacle02.png"));break;
-				case "obstacle03": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/resourse/obstacle_img/obstacle03.png"));break;
-			}
-		}catch(IOException e) {
-			e.printStackTrace();
+	public void getImage() throws IOException {
+		switch(type){
+			case "obstacle01": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/obstacle_img/obstacle03.png"));break;
+			case "obstacle02": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/obstacle_img/obstacle02.png"));break;
+			case "obstacle03": bufferedImage = ImageIO.read(getClass().getResourceAsStream("/obstacle_img/obstacle03.png"));break;
 		}
 	}
+		
 
 	@Override
 	public void draw(Graphics2D g2) {
@@ -52,7 +49,7 @@ public class Obstacle extends Entity implements Renderable,Updateable{
 	}
 	
 	@Override
-	public void update() {
+	public void update() throws IOException {
 		y += speed;
 		if(y >= Constant.screenHeight) {
 			Updater.removeUpdateList(this);
@@ -61,7 +58,7 @@ public class Obstacle extends Entity implements Renderable,Updateable{
 		checkCollision();
 	}
 
-	private void checkCollision() {
+	private void checkCollision() throws IOException {
 		Updateable collisionObj = isColliding(this,"jetFighter");
 		if(collisionObj != null) {
 			JetFighter obj = (JetFighter)collisionObj;

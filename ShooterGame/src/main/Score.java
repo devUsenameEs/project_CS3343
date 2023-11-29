@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import globalData.Constant;
 
@@ -35,6 +34,10 @@ public class Score {
 	
 	public int getScore() {
 		return score;
+	}
+	
+	public void setScore(int s) {
+		score = s;
 	}
 	
 	public void draw(Graphics2D g2) {
