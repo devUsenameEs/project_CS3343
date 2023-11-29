@@ -72,7 +72,7 @@ public class Test_Buff_Heart {
 		Buff_Heart buffHeart = new Buff_Heart(gameUI, x, y);
 
 		// Call the update method
-		Updater.update();	//Add jet and buffHeart into update_list for collision detection
+		Updater.update();	//Add jet and buffHeart into updateList for collision detection
 		buffHeart.update();
 
 		// Check whether jet's HP has changed from 4 to 5 after collision
