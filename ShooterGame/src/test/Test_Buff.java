@@ -55,7 +55,7 @@ public class Test_Buff {
 	}
 	
 	@Test
-	public void testBuffUpdate_Collision() {
+	public void testBuffCollision() {
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 		
