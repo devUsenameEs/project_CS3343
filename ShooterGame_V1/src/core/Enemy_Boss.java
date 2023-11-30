@@ -53,6 +53,7 @@ public class Enemy_Boss extends Enemy{
 	
 	@Override
 	public void update() throws IOException {
+		if(checkIfDie()<0){
 		x += speed_x;
 		y += speed_y;
 		if(speed_x > 0) {  
@@ -76,7 +77,10 @@ public class Enemy_Boss extends Enemy{
 		}
 		
 		//bullet
-		letBullet();
+		
+			letBullet();
+		}
+		
 		
 		super.checkCollision();
 		checkIfDie();
