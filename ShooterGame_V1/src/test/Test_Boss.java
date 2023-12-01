@@ -78,7 +78,7 @@ public class Test_Boss extends TestBase{
 
 	@Test
 	public void testUpdate_BossSpeedX_LargerThan0()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, IOException {
+		throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, IOException {
 		// Create a GameUI object
 		GameUI gameUI = new GameUI();
 
