@@ -72,7 +72,7 @@ public class Test_Enemy extends TestBase{
 		assertEquals(32, enemy.getHeight(), 0);
 	}
 	@Test
-	public void testEnemyGetspeed() throws IOException {
+	public void testEnemyGetSpeed() throws IOException {
 		GameUI gameUI = new GameUI();
 		Enemy enemy = new Enemy(gameUI, 100, 200, "enemy01");
 
