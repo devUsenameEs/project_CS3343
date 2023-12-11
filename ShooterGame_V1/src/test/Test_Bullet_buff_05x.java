@@ -14,7 +14,7 @@ import main.GameUI;
 
 public class Test_Bullet_buff_05x extends TestBase{
 	@Test
-	public void testGetImage() throws IOException{
+	public void testDefaultSetting() throws IOException{
 		GameUI gameUI = new GameUI();
 		Entity entity = new Entity(gameUI);
 
