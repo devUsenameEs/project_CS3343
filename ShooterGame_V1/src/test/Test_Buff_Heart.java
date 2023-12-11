@@ -23,7 +23,7 @@ import main.Main;
 public class Test_Buff_Heart extends TestBase{
 
 	@Test
-	public void testGetImage() throws IOException {
+	public void testDefaultSetting() throws IOException {
 		GameUI gameUI = new GameUI();
 
 		// Define test values
