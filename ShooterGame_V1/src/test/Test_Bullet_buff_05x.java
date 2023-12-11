@@ -34,7 +34,7 @@ public class Test_Bullet_buff_05x extends TestBase{
 	}
 	
 	@Test
-	public void test_fireBullet_buff_2x() throws IOException {
+	public void test_fireBullet_buff_05x() throws IOException {
 		GameUI gameUI = new GameUI();
 		JetFighter jet = new JetFighter(gameUI,gameUI.keyHandler,new EnergyBar());
 		jet.changeBullet("Bullet_Debuff");
